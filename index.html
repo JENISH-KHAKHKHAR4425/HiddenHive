@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hidden Gems of Gujarat</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">HiddenHive</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active-link">Home</a></li>
+        <li><a href="cities.html">Cities</a></li>
+        <li><a href="places.html">Hidden Places</a></li>
+        <li><a href="#about">About</a></li>
+        <li id="userSection"></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero" id="hero" style="background-image: url('images/MP.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+  <div class="overlay"></div>
+  <div class="hero-content">
+    <p class="hero-tag">Discover the unexplored side of Gujarat</p>
+    <h1>Discover the Hidden Gems of Gujarat</h1>
+    <p class="hero-text">
+      Explore lesser-known places, untold stories, peaceful corners,
+      and local treasures across Gujarat's cities.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#cities" class="btn btn-primary">Explore Cities</a>
+    </div>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search hidden places, cities, or categories..." />
+      <button onclick="searchContent()">Search</button>
+    </div>
+    </div>
+    </section>
+
+  <section class="intro section">
+    <div class="container">
+      <p class="section-label">Our Mission</p>
+      <h2>Beyond the Famous Tourist Spots</h2>
+      <p>
+        Most travelers know Gujarat for its popular landmarks, but many beautiful places remain unnoticed.
+        Hidden Gems of Gujarat helps users discover unique local spots across cities like Rajkot, Junagadh,
+        Surat, Ahmedabad, and Vadodara.
+      </p>
+    </div>
+  </section>
+
+  <section class="cities section" id="cities">
+    <div class="container">
+      <p class="section-label">Explore Cities</p>
+      <h2>Start Your Journey Through Gujarat</h2>
+      <div class="city-grid">
+
+        <div class="city-card">
+          <img src="images/Rajkot.jpg" alt="Rajkot">
+          <div class="card-content">
+            <h3>Rajkot</h3>
+            <p>Quiet lakesides, cultural corners, and lesser-known local experiences.</p>
+            <a href="city-details.html?city=rajkot" class="card-btn">Explore Rajkot</a>
+          </div>
+        </div>
+
+        <div class="city-card">
+          <img src="images/Junagadh.webp" alt="Junagadh">
+          <div class="card-content">
+            <h3>Junagadh</h3>
+            <p>Ancient heritage, hidden viewpoints, and old architectural charm.</p>
+            <a href="city-details.html?city=junagadh" class="card-btn">Explore Junagadh</a>
+          </div>
+        </div>
+
+        <div class="city-card">
+          <img src="images/Surat.jpeg"Surat">
+          <div class="card-content">
+            <h3>Surat</h3>
+            <p>Hidden food spots, local streets, and quiet urban gems.</p>
+            <a href="city-details.html?city=surat" class="card-btn">Explore Surat</a>
+          </div>
+        </div>
+
+        <div class="city-card">
+          <img src="images/ahmedabad.webp" alt="Ahmedabad">
+          <div class="card-content">
+            <h3>Ahmedabad</h3>
+            <p>Heritage lanes, historic corners, and local cultural discoveries.</p>
+            <a href="city-details.html?city=ahmedabad" class="card-btn">Explore Ahmedabad</a>
+          </div>
+        </div>
+
+        <div class="city-card">
+          <img src="images/Vadodara.jpg" alt="Vadodara">
+          <div class="card-content">
+            <h3>Vadodara</h3>
+            <p>Artistic spaces, peaceful gardens, and cultural hidden gems.</p>
+            <a href="city-details.html?city=vadodara" class="card-btn">Explore Vadodara</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="categories section">
+    <div class="container">
+      <p class="section-label">Explore by Category</p>
+      <h2>Find Places That Match Your Mood</h2>
+      <div class="category-grid">
+        <div class="category-card">
+          <h3>Nature</h3>
+          <p>Hidden lakes, green spaces, and peaceful viewpoints.</p>
+        </div>
+        <div class="category-card">
+          <h3>Historical</h3>
+          <p>Old streets, forgotten architecture, and heritage corners.</p>
+        </div>
+        <div class="category-card">
+          <h3>Spiritual</h3>
+          <p>Temples, calm sacred spots, and soulful hidden places.</p>
+        </div>
+        <div class="category-card">
+          <h3>Food &amp; Culture</h3>
+          <p>Authentic food lanes, traditions, and local life.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about section" id="about">
+    <div class="container">
+      <p class="section-label">Why This Platform</p>
+      <h2>Why Hidden Gems of Gujarat?</h2>
+      <p>
+        This platform is created to help people discover meaningful places beyond the common tourist routes.
+        By focusing on lesser-known locations, it encourages deeper local exploration and a more personal travel experience.
+      </p>
+
+      <div class="about-points">
+        <div class="about-box">Discover unique places</div>
+        <div class="about-box">Explore city-wise hidden spots</div>
+        <div class="about-box">Experience Gujarat differently</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta section">
+    <div class="container">
+      <h2>Ready to Explore Gujarat Differently?</h2>
+      <p>Find lesser-known places, hidden stories, and new experiences across Gujarat.</p>
+      <a href="#cities" class="btn btn-primary">Start Exploring</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <h3>Hidden Gems of Gujarat</h3>
+      <p>Discover hidden places across Rajkot, Junagadh, Surat, Ahmedabad, and Vadodara.</p>
+      <p>&copy; 2026 Hidden Gems of Gujarat. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

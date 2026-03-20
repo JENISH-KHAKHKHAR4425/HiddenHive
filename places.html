@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hidden Places | Hidden Gems of Gujarat</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">HiddenHive</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="cities.html">Cities</a></li>
+        <li><a href="places.html" class="active-link">Hidden Places</a></li>
+        <li><a href="#about-section">About</a></li>
+        <li id="userSection"></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="page-hero places-page-hero">
+    <div class="light-overlay"></div>
+    <div class="page-hero-content">
+      <p class="section-label">Hidden Places</p>
+      <h1 id="placesTitle">Explore Gujarat's Lesser-Known Corners</h1>
+      <p>
+        Discover peaceful spots, local secrets, old heritage corners, and unique places
+        across Rajkot, Junagadh, Surat, Ahmedabad, and Vadodara.
+      </p>
+    </div>
+  </section>
+
+  <section class="section filter-section">
+    <div class="container">
+      <div class="section-heading">
+        <p class="section-label">Search &amp; Filter</p>
+        <h2>Find a Hidden Place</h2>
+        <p>Browse hidden places by city or category.</p>
+      </div>
+
+      <div class="filter-bar">
+        <input type="text" id="placeSearch" placeholder="Search hidden places..." />
+
+        <select id="cityFilter">
+          <option value="all">All Cities</option>
+          <option value="rajkot">Rajkot</option>
+          <option value="junagadh">Junagadh</option>
+          <option value="surat">Surat</option>
+          <option value="ahmedabad">Ahmedabad</option>
+          <option value="vadodara">Vadodara</option>
+        </select>
+
+        <select id="categoryFilter">
+          <option value="all">All Categories</option>
+          <option value="nature">Nature</option>
+          <option value="historical">Historical</option>
+          <option value="spiritual">Spiritual</option>
+          <option value="food">Food &amp; Culture</option>
+        </select>
+
+        <button onclick="filterPlaces()">Search</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="place-grid" id="placesContainer">
+
+        <div class="place-card place-item" data-city="rajkot" data-category="nature">
+          <img src="images/Park/LalPari.jpg" alt="Lalpari Quiet Spot">
+          <div class="card-content">
+            <span class="badge">Rajkot - Nature</span>
+            <h3>Lalpari Quiet Spot</h3>
+            <p>A peaceful lakeside area away from the main city rush.</p>
+            <a href="details.html?name=Lalpari%20Quiet%20Spot" class="card-btn">Explore More</a>
+          </div>
+        </div>
+
+        <div class="place-card place-item" data-city="rajkot" data-category="historical">
+          <img src="images/ROS.jpg" alt="Old Rajkot Street">
+          <div class="card-content">
+            <span class="badge">Rajkot - Historical</span>
+            <h3>Old Rajkot Street</h3>
+            <p>A hidden heritage lane reflecting the old charm of the city.</p>
+            <a href="details.html?name=Old%20Rajkot%20Street" class="card-btn">Explore More</a>
+          </div>
+        </div>
+
+        <div class="place-card place-item" data-city="junagadh" data-category="spiritual">
+          <img src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=900&q=80" alt="Temple Hill Viewpoint">
+          <div class="card-content">
+            <span class="badge">Junagadh - Spiritual</span>
+            <h3>Temple Hill Viewpoint</h3>
+            <p>A calm spiritual spot with peaceful surroundings and scenic views.</p>
+            <a href="details.html?name=Temple%20Hill%20Viewpoint" class="card-btn">Explore More</a>
+          </div>
+        </div>
+
+        <div class="place-card place-item" data-city="junagadh" data-category="historical">
+          <img src="https://images.unsplash.com/photo-1539650116574-75c0c6d73f2f?auto=format&fit=crop&w=900&q=80" alt="Hidden Fort Corner">
+          <div class="card-content">
+            <span class="badge">Junagadh - Historical</span>
+            <h3>Hidden Fort Corner</h3>
+            <p>A lesser-noticed architectural corner near the heritage zone.</p>
+            <a href="details.html?name=Hidden%20Fort%20Corner" class="card-btn">Explore More</a>
+          </div>
+        </div>
+
+        <div class="place-card place-item" data-city="surat" data-category="food">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80" alt="Hidden Food Street">
+          <div class="card-content">
+            <span class="badge">Surat - Food &amp; Culture</span>
+            <h3>Hidden Food Street</h3>
+            <p>A less-known food lane loved by locals for authentic taste.</p>
+            <a href="details.html?name=Hidden%20Food%20Street" class="card-btn">Explore More</a>
+          </div>
+        </div>
+
+        <div class="place-card place-item" data-city="surat" data-category="nature">
+          <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=900&q=80" alt="Quiet Riverside Walk">
+          <div class="card-content">
+            <span class="badge">Surat - Nature</span>
+            <h3>Quiet Riverside Walk</h3>
+            <p>A relaxing hidden riverside area ideal for evening visits.</p>
+            <a href="details.html?name=Quiet%20Riverside%20Walk" class="card-btn">Explore More</a>
+          </div>
+        </div>
+
+        <div class="place-card place-item" data-city="ahmedabad" data-category="historical">
+          <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=900&q=80" alt="Old Heritage Lane">
+          <div class="card-content">
+            <span class="badge">Ahmedabad - Historical</span>
+            <h3>Old Heritage Lane</h3>
+            <p>A narrow old street full of local history and hidden stories.</p>
+            <a href="details.html?name=Old%20Heritage%20Lane" class="card-btn">Explore More</a>
+          </div>
+        </div>
+
+        <div class="place-card place-item" data-city="ahmedabad" data-category="food">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80" alt="Cultural Food Corner">
+          <div class="card-content">
+            <span class="badge">Ahmedabad - Food &amp; Culture</span>
+            <h3>Cultural Food Corner</h3>
+            <p>A cozy lane filled with authentic flavors and local culture.</p>
+            <a href="details.html?name=Cultural%20Food%20Corner" class="card-btn">Explore More</a>
+          </div>
+        </div>
+
+        <div class="place-card place-item" data-city="vadodara" data-category="nature">
+          <img src="https://images.unsplash.com/photo-1470770903676-69b98201ea1c?auto=format&fit=crop&w=900&q=80" alt="Garden Retreat Corner">
+          <div class="card-content">
+            <span class="badge">Vadodara - Nature</span>
+            <h3>Garden Retreat Corner</h3>
+            <p>A calm green escape perfect for peaceful walks and quiet time.</p>
+            <a href="details.html?name=Garden%20Retreat%20Corner" class="card-btn">Explore More</a>
+          </div>
+        </div>
+
+        <div class="place-card place-item" data-city="vadodara" data-category="spiritual">
+          <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=80" alt="Hidden Temple Court">
+          <div class="card-content">
+            <span class="badge">Vadodara - Spiritual</span>
+            <h3>Hidden Temple Court</h3>
+            <p>A peaceful sacred place away from the usual crowded routes.</p>
+            <a href="details.html?name=Hidden%20Temple%20Court" class="card-btn">Explore More</a>
+          </div>
+        </div>
+
+      </div>
+
+      <p id="noResultsMessage" class="no-results" style="display: none;">
+        No hidden places found for your search.
+      </p>
+    </div>
+  </section>
+
+  <section class="about section" id="about-section">
+    <div class="container">
+      <p class="section-label">Why This Section</p>
+      <h2>Designed for Meaningful Exploration</h2>
+      <p>
+        This hidden places page helps users discover city-wise local gems in a simple way.
+        With search and filters, the experience becomes easier, faster, and more human-centered.
+      </p>
+    </div>
+  </section>
+
+  <footer class="footer light-footer">
+    <div class="container">
+      <h3>Hidden Gems of Gujarat</h3>
+      <p>Explore Gujarat beyond the common tourist map.</p>
+      <p>&copy; 2026 Hidden Gems of Gujarat. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
