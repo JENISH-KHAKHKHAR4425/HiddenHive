@@ -4,169 +4,215 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hidden Gems of Gujarat</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  
+  <!-- AOS Library for scroll animations -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <style>
+    /* ===== GLOBAL ===== */
+    html { scroll-behavior: smooth; }
+
+    /* ===== HERO SECTION ===== */
+    .hero { position: relative; height: 90vh; color: #fff; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
+    .hero::before { content: ""; position: absolute; width: 110%; height: 110%; background: inherit; background-size: cover; background-position: center; animation: zoomBg 20s infinite alternate ease-in-out; z-index: 0; }
+    @keyframes zoomBg { from { transform: scale(1); } to { transform: scale(1.1); } }
+    .hero .overlay { position: absolute; width: 100%; height: 100%; background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.3)); z-index: 1; }
+    .hero-content { position: relative; z-index: 2; max-width: 800px; animation: floatUp 1.5s ease-in-out; }
+    @keyframes floatUp { from { opacity:0; transform: translateY(40px); } to { opacity:1; transform: translateY(0); } }
+    .hero-content h1 { font-size: 2.8rem; animation: floatText 3s ease-in-out infinite; }
+    @keyframes floatText { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+    /* ===== NAVBAR ===== */
+    .navbar { position: fixed; width: 100%; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); background: rgba(0,0,0,0.5); z-index: 1000; transition: 0.3s; }
+    .navbar:hover { background: rgba(0,0,0,0.8); }
+    .logo { font-size: 1.8rem; color: #fff; font-weight: bold; transition: 0.3s; }
+    .logo:hover { color: #ff7f50; transform: scale(1.05); }
+    .nav-links { display: flex; gap: 30px; list-style: none; }
+    .nav-links li a { color: #fff; text-decoration: none; position: relative; transition: 0.3s; }
+    .nav-links li a::after { content: ''; position: absolute; width: 0%; height: 2px; bottom: -4px; left: 0; background: linear-gradient(90deg,#ff7f50,#ff5722); transition: 0.3s; }
+    .nav-links li a:hover::after { width: 100%; }
+
+    /* ===== BUTTON ===== */
+    .btn-primary { background: linear-gradient(45deg,#ff7f50,#ff5722); color: #fff; padding: 12px 30px; border-radius: 30px; text-decoration: none; transition: 0.3s; box-shadow: 0 5px 15px rgba(255,127,80,0.4); }
+    .btn-primary:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 10px 25px rgba(255,87,34,0.6); }
+
+    /* ===== SEARCH BOX ===== */
+    .search-box { margin-top: 20px; }
+    .search-box input { padding: 12px 15px; border-radius: 30px 0 0 30px; border: none; width: 250px; transition: 0.3s; }
+    .search-box input:focus { width: 300px; }
+    .search-box button { padding: 12px 20px; border-radius: 0 30px 30px 0; border: none; background: linear-gradient(45deg,#ff7f50,#ff5722); color: #fff; cursor: pointer; transition: 0.3s; }
+    .search-box button:hover { transform: scale(1.05); }
+
+    /* ===== CITY CARDS ===== */
+    .city-card { overflow: hidden; border-radius: 20px; transition: 0.4s; }
+    .city-card img { width: 100%; transition: 0.4s; }
+    .city-card:hover img { transform: scale(1.1); }
+    .city-card:hover { transform: translateY(-10px) scale(1.03); box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
+
+    /* ===== CATEGORY SECTION ===== */
+    .categories { background: linear-gradient(270deg, #1f1c2c, #928dab, #1f4037, #99f2c8); background-size: 600% 600%; animation: gradientShift 12s ease infinite; color: #fff; position: relative; overflow: hidden; }
+    @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    .category-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; margin-top: 40px; }
+    @media (max-width: 900px) { .category-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .category-grid { grid-template-columns: 1fr; } }
+    .category-card { padding: 30px 20px; border-radius: 20px; text-align: center; cursor: pointer; position: relative; overflow: hidden; backdrop-filter: blur(15px); background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); transition: all 0.4s ease; }
+    .category-card::before { content: ""; position: absolute; width: 150%; height: 150%; top: -50%; left: -50%; background: radial-gradient(circle, rgba(255,255,255,0.2), transparent); opacity: 0; transition: 0.5s; }
+    .category-card:hover::before { opacity: 1; }
+    .category-card:hover { transform: translateY(-12px) scale(1.05); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+    .category-card .icon { font-size: 2.5rem; margin-bottom: 10px; transition: transform 0.3s; }
+    .category-card:hover .icon { transform: rotate(10deg) scale(1.2); }
+    .category-card h3 { margin-bottom: 10px; font-size: 1.3rem; }
+    .category-card p { font-size: 0.95rem; color: #ddd; }
+    .category-card.nature:hover { border-color: #00ffae; }
+    .category-card.history:hover { border-color: #ffc107; }
+    .category-card.spiritual:hover { border-color: #ff7f50; }
+    .category-card.food:hover { border-color: #ff4b2b; }
+
+    /* ===== FOOTER ===== */
+    .footer { text-align: center; padding: 40px; background: linear-gradient(to right,#111,#222); color: #fff; }
+    .footer h3 { color: #ff7f50; }
+    .footer p { color: #ccc; }
+  </style>
 </head>
+
 <body>
 
-  <header class="navbar">
-    <div class="logo">HiddenHive</div>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="index.html" class="active-link">Home</a></li>
-        <li><a href="cities.html">Cities</a></li>
-        <li><a href="places.html">Hidden Places</a></li>
-        <li><a href="#about">About</a></li>
-        <li id="userSection"></li>
-      </ul>
-    </nav>
-  </header>
+<script>
+  // ✅ Redirect if not logged in
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  if (!isLoggedIn) {
+    window.location.href = "login.html";
+  }
+</script>
 
-  <section class="hero" id="hero" style="background-image: url('images/MP.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+<!-- Navbar -->
+<header class="navbar" data-aos="fade-down">
+  <div class="logo" data-aos="fade-right">HiddenHive</div>
+  <nav>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active-link" data-aos="fade-left" data-aos-delay="50">Home</a></li>
+      <li><a href="about.html" data-aos="fade-left" data-aos-delay="200">About</a></li>
+      <li id="userSection" data-aos="fade-left" data-aos-delay="250"></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="hero" id="hero" style="background-image: url('assets/images/Gujarat.jpeg');">
   <div class="overlay"></div>
   <div class="hero-content">
-    <p class="hero-tag">Discover the unexplored side of Gujarat</p>
-    <h1>Discover the Hidden Gems of Gujarat</h1>
-    <p class="hero-text">
-      Explore lesser-known places, untold stories, peaceful corners,
-      and local treasures across Gujarat's cities.
+    <h1 data-aos="fade-up" data-aos-delay="200">Discover the Hidden Gems of Gujarat</h1>
+    <p class="hero-text" data-aos="fade-up" data-aos-delay="300">
+      Explore secret spots, hidden corners, and unforgettable experiences waiting for you.
     </p>
 
-    <div class="hero-buttons">
+    <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
       <a href="#cities" class="btn btn-primary">Explore Cities</a>
     </div>
 
-    <div class="search-box">
+    <div class="search-box" data-aos="fade-up" data-aos-delay="500">
       <input type="text" id="searchInput" placeholder="Search hidden places, cities, or categories..." />
       <button onclick="searchContent()">Search</button>
     </div>
-    </div>
-    </section>
+  </div>
+</section>
 
-  <section class="intro section">
+<!-- Cities Section -->
+<section class="cities section" id="cities" data-aos="fade-up">
     <div class="container">
-      <p class="section-label">Our Mission</p>
-      <h2>Beyond the Famous Tourist Spots</h2>
-      <p>
-        Most travelers know Gujarat for its popular landmarks, but many beautiful places remain unnoticed.
-        Hidden Gems of Gujarat helps users discover unique local spots across cities like Rajkot, Junagadh,
-        Surat, Ahmedabad, and Vadodara.
-      </p>
-    </div>
-  </section>
-
-  <section class="cities section" id="cities">
-    <div class="container">
-      <p class="section-label">Explore Cities</p>
-      <h2>Start Your Journey Through Gujarat</h2>
+      <h2 data-aos="fade-up">Start Your Journey Through Gujarat</h2>
       <div class="city-grid">
-
-        <div class="city-card">
-          <img src="images/Rajkot.jpg" alt="Rajkot">
+        <div class="city-card" data-aos="fade-up" data-aos-delay="100">
+          <img src="assets/images/cities/Rajkot.jpg" alt="Rajkot">
           <div class="card-content">
             <h3>Rajkot</h3>
             <p>Quiet lakesides, cultural corners, and lesser-known local experiences.</p>
-            <a href="city-details.html?city=rajkot" class="card-btn">Explore Rajkot</a>
+            <a href="city-details.html?city=rajkot" class="card-btn btn-primary">Explore Rajkot</a>
           </div>
         </div>
-
-        <div class="city-card">
-          <img src="images/Junagadh.webp" alt="Junagadh">
+        <div class="city-card" data-aos="fade-up" data-aos-delay="200">
+          <img src="assets/images/cities/Junagadh.webp" alt="Junagadh">
           <div class="card-content">
             <h3>Junagadh</h3>
             <p>Ancient heritage, hidden viewpoints, and old architectural charm.</p>
-            <a href="city-details.html?city=junagadh" class="card-btn">Explore Junagadh</a>
+            <a href="city-details.html?city=junagadh" class="card-btn btn-primary">Explore Junagadh</a>
           </div>
         </div>
-
-        <div class="city-card">
-          <img src="images/Surat.jpeg"Surat">
+        <div class="city-card" data-aos="fade-up" data-aos-delay="300">
+          <img src="assets/images/cities/Surat.jpeg" alt="Surat">
           <div class="card-content">
             <h3>Surat</h3>
             <p>Hidden food spots, local streets, and quiet urban gems.</p>
-            <a href="city-details.html?city=surat" class="card-btn">Explore Surat</a>
+            <a href="city-details.html?city=surat" class="card-btn btn-primary">Explore Surat</a>
           </div>
         </div>
-
-        <div class="city-card">
-          <img src="images/ahmedabad.webp" alt="Ahmedabad">
+        <div class="city-card" data-aos="fade-up" data-aos-delay="400">
+          <img src="assets/images/cities/ahmedabad.webp" alt="Ahmedabad">
           <div class="card-content">
             <h3>Ahmedabad</h3>
             <p>Heritage lanes, historic corners, and local cultural discoveries.</p>
-            <a href="city-details.html?city=ahmedabad" class="card-btn">Explore Ahmedabad</a>
+            <a href="city-details.html?city=ahmedabad" class="card-btn btn-primary">Explore Ahmedabad</a>
           </div>
         </div>
-
-        <div class="city-card">
-          <img src="images/Vadodara.jpg" alt="Vadodara">
+        <div class="city-card" data-aos="fade-up" data-aos-delay="500">
+          <img src="assets/images/cities/Vadodara.jpg" alt="Vadodara">
           <div class="card-content">
             <h3>Vadodara</h3>
             <p>Artistic spaces, peaceful gardens, and cultural hidden gems.</p>
-            <a href="city-details.html?city=vadodara" class="card-btn">Explore Vadodara</a>
+            <a href="city-details.html?city=vadodara" class="card-btn btn-primary">Explore Vadodara</a>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <section class="categories section">
-    <div class="container">
-      <p class="section-label">Explore by Category</p>
-      <h2>Find Places That Match Your Mood</h2>
-      <div class="category-grid">
-        <div class="category-card">
-          <h3>Nature</h3>
-          <p>Hidden lakes, green spaces, and peaceful viewpoints.</p>
-        </div>
-        <div class="category-card">
-          <h3>Historical</h3>
-          <p>Old streets, forgotten architecture, and heritage corners.</p>
-        </div>
-        <div class="category-card">
-          <h3>Spiritual</h3>
-          <p>Temples, calm sacred spots, and soulful hidden places.</p>
-        </div>
-        <div class="category-card">
-          <h3>Food &amp; Culture</h3>
-          <p>Authentic food lanes, traditions, and local life.</p>
-        </div>
-      </div>
+<!-- Categories Section -->
+<section class="categories section">
+  <div class="container">
+    <p class="section-label">Explore by Category</p>
+    <h2>Find Places That Match Your Mood</h2>
+
+    <div class="category-grid">
+      <div class="category-card nature"><div class="icon">🌿</div><h3>Nature</h3><p>Hidden lakes, green spaces, and peaceful viewpoints.</p></div>
+      <div class="category-card history"><div class="icon">🏛️</div><h3>Historical</h3><p>Old streets, forgotten architecture, and heritage corners.</p></div>
+      <div class="category-card spiritual"><div class="icon">🛕</div><h3>Spiritual</h3><p>Temples, calm sacred spots, and soulful hidden places.</p></div>
+      <div class="category-card food"><div class="icon">🍜</div><h3>Food & Culture</h3><p>Authentic food lanes, traditions, and local life.</p></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="about section" id="about">
-    <div class="container">
-      <p class="section-label">Why This Platform</p>
-      <h2>Why Hidden Gems of Gujarat?</h2>
-      <p>
-        This platform is created to help people discover meaningful places beyond the common tourist routes.
-        By focusing on lesser-known locations, it encourages deeper local exploration and a more personal travel experience.
-      </p>
+<!-- Footer -->
+<footer class="footer" data-aos="fade-up">
+  <div class="container">
+    <h3>HiddenHive</h3>
+    <p>Uncover secret spots, hidden corners, and unforgettable experiences.</p>
+    <p>&copy; 2026 Hidden Gems of Gujarat. All rights reserved.</p>
+  </div>
+</footer>
 
-      <div class="about-points">
-        <div class="about-box">Discover unique places</div>
-        <div class="about-box">Explore city-wise hidden spots</div>
-        <div class="about-box">Experience Gujarat differently</div>
-      </div>
-    </div>
-  </section>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 
-  <section class="cta section">
-    <div class="container">
-      <h2>Ready to Explore Gujarat Differently?</h2>
-      <p>Find lesser-known places, hidden stories, and new experiences across Gujarat.</p>
-      <a href="#cities" class="btn btn-primary">Start Exploring</a>
-    </div>
-  </section>
+<script>
+  AOS.init({ duration: 1200 });
 
-  <footer class="footer">
-    <div class="container">
-      <h3>Hidden Gems of Gujarat</h3>
-      <p>Discover hidden places across Rajkot, Junagadh, Surat, Ahmedabad, and Vadodara.</p>
-      <p>&copy; 2026 Hidden Gems of Gujarat. All rights reserved.</p>
-    </div>
-  </footer>
+  // ✅ Navbar user section: Login / Logout
+  const userSection = document.getElementById("userSection");
+  const loggedIn = localStorage.getItem("isLoggedIn");
 
-  <script src="script.js"></script>
+  if (loggedIn) {
+    userSection.innerHTML = `<a href="#" onclick="logoutUser()" style="color:#ff7f50;">Logout</a>`;
+  } else {
+    userSection.innerHTML = `<a href="login.html">Login</a>`;
+  }
+
+  function logoutUser() {
+    localStorage.removeItem("isLoggedIn");
+    window.location.href = "login.html";
+  }
+</script>
+
 </body>
 </html>
