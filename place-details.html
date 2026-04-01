@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explore City | Hidden Gems of Gujarat</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">HiddenHive</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="cities.html" class="active-link">Cities</a></li>
+        <li><a href="places.html">Hidden Places</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li id="userSection"></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="page-hero city-explorer-hero" id="cityExplorerHero">
+    <div class="overlay light-overlay"></div>
+    <div class="page-hero-content">
+      <p class="section-label">City Explorer</p>
+      <h1 id="cityExplorerTitle">Explore the City</h1>
+      <p id="cityExplorerText">
+        Choose what kind of place you want to discover in this city.
+      </p>
+    </div>
+  </section>
+
+  <section class="section city-category-section">
+    <div class="container">
+      <div class="section-heading">
+        <p class="section-label">Select Category</p>
+        <h2>What Do You Want to Explore?</h2>
+        <p>Choose a type and we will show matching places from this city.</p>
+      </div>
+
+      <div class="city-category-grid" id="cityCategoryGrid"></div>
+    </div>
+  </section>
+
+  <section class="section city-results-section">
+    <div class="container">
+      <div class="city-results-header">
+        <div>
+          <p class="section-label">City Places</p>
+          <h2 id="cityPlacesHeading">Places in This City</h2>
+        </div>
+        <a href="cities.html" class="card-btn city-back-link">Back to Cities</a>
+      </div>
+
+      <div class="place-grid" id="cityPlacesGrid"></div>
+      <p class="no-results" id="cityPlacesEmpty" style="display: none;">No places found in this category.</p>
+    </div>
+  </section>
+
+  <footer class="footer light-footer">
+    <div class="container">
+      <h3>Hidden Gems of Gujarat</h3>
+      <p>Explore hidden places across Gujarat.</p>
+      <p>&copy; 2026 Hidden Gems of Gujarat.</p> 
+      <p>All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
