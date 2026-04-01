@@ -4,52 +4,263 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login | Hidden Gems of Gujarat</title>
-  <link rel="stylesheet" href="style.css" />
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <style>
+/* Background video enhancement */
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6) contrast(1.1) saturate(1.2);
+  z-index: -2;
+}
+
+/* Overlay gradient (sunset vibe) */
+.auth-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(0,0,0,0.6),
+    rgba(255, 94, 0, 0.3)
+  );
+  z-index: -1;
+}
+
+/* Card (Glass effect) */
+.auth-card {
+  display: flex;
+  width: 900px;
+  max-width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  backdrop-filter: blur(18px);
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 10px 50px rgba(0,0,0,0.7);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Left side (text glow) */
+.auth-left {
+  flex: 1;
+  padding: 40px;
+  color: #fff;
+}
+
+.auth-left h1 {
+  font-size: 28px;
+  text-shadow: 0 0 15px rgba(255, 140, 0, 0.6);
+}
+
+/* Right side */
+.auth-right {
+  flex: 1;
+  padding: 40px;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+}
+
+/* Input styling */
+.auth-input-group input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  transition: 0.3s;
+}
+
+/* Placeholder color */
+.auth-input-group input::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+/* Focus glow */
+.auth-input-group input:focus {
+  border: 1px solid #ff7f50;
+  box-shadow: 0 0 12px rgba(255, 127, 80, 0.8);
+  background: rgba(255,255,255,0.15);
+}
+
+/* Button (sunset gradient) */
+.auth-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(45deg,#ff7f50,#ff3c00);
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+/* Button hover */
+.auth-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(45deg,#ff9a44,#ff5e00);
+  box-shadow: 0 5px 25px rgba(255, 94, 0, 0.7);
+}
+
+/* Button click */
+.auth-btn:active {
+  transform: scale(0.96);
+}
+
+/* Error */
+.error {
+  color: #ff6b6b;
+  font-size: 12px;
+  margin-top: 5px;
+  display: none;
+}
+
+/* Link */
+.auth-switch a {
+  color: #ff7f50;
+  text-decoration: none;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}
+
+/* Animation */
+.auth-card {
+  animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
 </head>
+
 <body class="auth-page">
 
-  <!-- ✅ Background Video (move outside) -->
+  <!-- Background Video -->
   <video autoplay muted loop playsinline id="bg-video">
-    <source src="images/istockphoto-2208334306-640_adpp_is.mp4" type="video/mp4">
+    <source src="assets/videos/istockphoto-2041465190-640_adpp_is.mp4" type="video/mp4">
   </video>
 
   <section class="auth-wrapper">
+
     <div class="auth-overlay"></div>
 
     <div class="auth-card">
+
+      <!-- Left Side -->
       <div class="auth-left">
         <p class="section-label">Welcome Back</p>
         <h1>Login to Explore Hidden Gujarat</h1>
         <p>
-          Sign in to continue your journey through Gujarat's lesser-known places,
-          hidden stories, and local treasures.
+          Continue your journey and discover unique places,
+          hidden corners, and unforgettable experiences across Gujarat.
         </p>
       </div>
 
+      <!-- Right Side -->
       <div class="auth-right">
         <h2>Login</h2>
 
+        <!-- Email -->
         <div class="auth-input-group">
-          <label for="username">Username</label>
-          <input type="text" id="username" placeholder="Enter username" />
+          <label for="email">Email</label>
+          <input 
+            type="email" 
+            id="email" 
+            placeholder="Enter your email" 
+            required
+          />
+          <div class="error" id="emailError">Enter a valid email</div>
         </div>
 
+        <!-- Password -->
         <div class="auth-input-group">
           <label for="password">Password</label>
-          <input type="password" id="password" placeholder="Enter password" />
+          <input 
+            type="password" 
+            id="password" 
+            placeholder="Enter your password" 
+            required
+          />
+          <div class="error" id="passError">Password must be at least 6 characters</div>
         </div>
 
+        <!-- Button -->
         <button class="auth-btn" onclick="loginUser()">Login</button>
 
+        <!-- Switch -->
         <p class="auth-switch">
-          Don't have an account?
+          Don’t have an account?
           <a href="signup.html">Create one</a>
         </p>
-
       </div>
+
     </div>
   </section>
 
-  <script src="script.js"></script>
+  <!-- JS -->
+  <script>
+function loginUser() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const emailError = document.getElementById("emailError");
+  const passError = document.getElementById("passError");
+
+  let valid = true;
+
+  // Email validation
+  if (!email.includes("@") || !email.includes(".")) {
+    emailError.style.display = "block";
+    valid = false;
+  } else {
+    emailError.style.display = "none";
+  }
+
+  // Password validation
+  if (password.length < 6) {
+    passError.style.display = "block";
+    valid = false;
+  } else {
+    passError.style.display = "none";
+  }
+
+  // If valid → login process
+  if (valid) {
+    const btn = document.querySelector(".auth-btn");
+    btn.innerText = "Logging in...";
+    btn.style.background = "#4CAF50";
+
+    // ✅ Save login state
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("userEmail", email);
+
+    setTimeout(() => {
+      alert("Login Successful 🎉");
+
+      // Redirect to homepage
+      window.location.href = "index.html";
+    }, 1200);
+  }
+}
+</script>
 </body>
 </html>
