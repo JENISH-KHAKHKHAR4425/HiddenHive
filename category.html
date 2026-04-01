@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Category | Hidden Gems</title>
+
+<style>
+
+/* ===== GLOBAL ===== */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #f5f7fa;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 15px 50px;
+  display: flex;
+  justify-content: space-between;
+  background: rgba(0,0,0,0.7);
+  z-index: 1000;
+}
+.logo { color: #fff; font-size: 1.8rem; font-weight: bold; }
+.nav-links { display: flex; gap: 30px; list-style: none; }
+.nav-links a { color: #fff; text-decoration: none; }
+
+/* ===== HERO ===== */
+.hero {
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg,#1e3c72,#2a5298);
+  color: #fff;
+  text-align: center;
+}
+
+/* ===== SECTION ===== */
+.section { padding: 100px 20px; }
+
+/* ===== GRID ===== */
+.place-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+/* ===== CARD ===== */
+.place-card {
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  transition: 0.4s;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 0.6s forwards;
+}
+
+.place-card:hover {
+  transform: translateY(-8px) scale(1.02);
+}
+
+/* ===== ANIMATION ===== */
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* IMAGE */
+.place-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* CONTENT */
+.place-content {
+  padding: 15px;
+}
+
+.place-content h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.place-content p {
+  font-size: 14px;
+  color: #555;
+  margin: 8px 0;
+}
+
+/* BUTTON */
+.btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 15px;
+  background: linear-gradient(135deg,#ff7f50,#ff9966);
+  color: #fff;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: linear-gradient(135deg,#ff5e3a,#ff7f50);
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="logo">HiddenHive</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="cities.html">Cities</a></li>
+  </ul>
+</header>
+
+<section class="hero">
+  <div>
+    <h1 id="categoryTitle">Category</h1>
+    <p id="cityName"></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="place-grid" id="placeGrid"></div>
+</section>
+
+<script>
+
+// ================= DATA =================
+const cityExplorerData = {
+
+  rajkot: {
+    name: "Rajkot",
+    heroImage: "assets/images/cities/Rajkot.jpg",
+    places: [
+      { name: "Racecourse Park", type: "Park" },
+      { name: "Kaba Gandhi Ground", type: "Park" },
+      { name: "Aji Dam Garden", type: "Park" },
+      { name: "Mokshdham Garden", type: "Park" },
+
+      { name: "Moksh Hill", type: "Hill Station" },
+      { name: "Rajkot Hills", type: "Hill Station" },
+      { name: "Osam Hill", type: "Hill Station" },
+      { name: "Girnar Hills (Nearby)", type: "Hill Station" },
+
+      { name: "Swaminarayan Temple", type: "Temple" },
+      { name: "Hatkeshwar Mahadev", type: "Temple" },
+      { name: "Iskcon Temple", type: "Temple" },
+      { name: "BAPS Temple", type: "Temple" },
+
+      { name: "Cafe Coffee Day", type: "Cafe" },
+      { name: "Cafe Zest", type: "Cafe" },
+      { name: "Belgian Waffle Cafe", type: "Cafe" },
+      { name: "Mocha Cafe", type: "Cafe" },
+
+      { name: "Rajkot Museum", type: "Museum" },
+      { name: "Lal Pari Museum", type: "Museum" },
+      { name: "Watson Museum", type: "Museum" },
+      { name: "Rotary Dolls Museum", type: "Museum" },
+
+      { name: "Aji Waterfall", type: "Waterfall" },
+      { name: "Nana Waterfall", type: "Waterfall" },
+      { name: "Jamjir Waterfall", type: "Waterfall" },
+      { name: "Hathni Mata Falls", type: "Waterfall" },
+
+      { name: "Fun World", type: "Adventure" },
+      { name: "Sky Adventure Park", type: "Adventure" },
+      { name: "Water Park Rajkot", type: "Adventure" },
+      { name: "Trekking Zone", type: "Adventure" },
+
+      { name: "Dwarka Beach", type: "Beach" },
+      { name: "Porbandar Beach", type: "Beach" },
+      { name: "Madhavpur Beach", type: "Beach" },
+      { name: "Veraval Beach", type: "Beach" }
+    ]
+  },
+
+  junagadh: {
+    name: "Junagadh",
+    heroImage: "assets/images/cities/Junagadh.webp",
+    places: [
+      { name: "Sakkarbaug Zoo Park", type: "Park" },
+      { name: "Indreshwar Park", type: "Park" },
+      { name: "Motibaug Park", type: "Park" },
+      { name: "Children Park", type: "Park" },
+
+      { name: "Girnar Hills", type: "Hill Station" },
+      { name: "Datar Hills", type: "Hill Station" },
+      { name: "Gir Forest Hills", type: "Hill Station" },
+      { name: "Osam Hill", type: "Hill Station" },
+
+      { name: "Ambaji Temple", type: "Temple" },
+      { name: "Dattatreya Temple", type: "Temple" },
+      { name: "Bhavnath Mahadev", type: "Temple" },
+      { name: "Swaminarayan Temple", type: "Temple" },
+
+      { name: "Cafe Junagadh", type: "Cafe" },
+      { name: "Food Zone Cafe", type: "Cafe" },
+      { name: "Coffee Culture", type: "Cafe" },
+      { name: "Cafe Delight", type: "Cafe" },
+
+      { name: "Darbar Hall Museum", type: "Museum" },
+      { name: "Uparkot Museum", type: "Museum" },
+      { name: "Ashoka Edicts", type: "Museum" },
+      { name: "Junagadh Museum", type: "Museum" },
+
+      { name: "Jamjir Waterfall", type: "Waterfall" },
+      { name: "Girnar Falls", type: "Waterfall" },
+      { name: "Barda Falls", type: "Waterfall" },
+      { name: "Hathni Mata Falls", type: "Waterfall" },
+
+      { name: "Gir Safari", type: "Adventure" },
+      { name: "Girnar Trek", type: "Adventure" },
+      { name: "Camping Gir", type: "Adventure" },
+      { name: "Rock Climbing", type: "Adventure" },
+
+      { name: "Chorwad Beach", type: "Beach" },
+      { name: "Veraval Beach", type: "Beach" },
+      { name: "Somnath Beach", type: "Beach" },
+      { name: "Madhavpur Beach", type: "Beach" }
+    ]
+  },
+
+  surat: {
+    name: "Surat",
+    heroImage: "assets/images/cities/Surat.jpeg",
+    places: [
+      { name: "Gopi Talav", type: "Park" },
+      { name: "Sarthana Nature Park", type: "Park" },
+      { name: "Dutch Garden", type: "Park" },
+      { name: "Amaazia Park", type: "Park" },
+
+      { name: "Saputara", type: "Hill Station" },
+      { name: "Don Hill", type: "Hill Station" },
+      { name: "Wilson Hills", type: "Hill Station" },
+      { name: "Dang Hills", type: "Hill Station" },
+
+      { name: "Ambika Niketan", type: "Temple" },
+      { name: "ISKCON Surat", type: "Temple" },
+      { name: "Chintamani Jain Temple", type: "Temple" },
+      { name: "BAPS Temple", type: "Temple" },
+
+      { name: "Meraki Cafe", type: "Cafe" },
+      { name: "Coffee King", type: "Cafe" },
+      { name: "Cafe De Meet", type: "Cafe" },
+      { name: "CCD Surat", type: "Cafe" },
+
+      { name: "Science Center", type: "Museum" },
+      { name: "Sardar Patel Museum", type: "Museum" },
+      { name: "Textile Museum", type: "Museum" },
+      { name: "Dutch Cemetery", type: "Museum" },
+
+      { name: "Gira Falls", type: "Waterfall" },
+      { name: "Zarwani Falls", type: "Waterfall" },
+      { name: "Purna Falls", type: "Waterfall" },
+      { name: "Shabari Falls", type: "Waterfall" },
+
+      { name: "Amaazia Water Park", type: "Adventure" },
+      { name: "VR Mall Fun Zone", type: "Adventure" },
+      { name: "Adventure Park", type: "Adventure" },
+      { name: "Dang Trekking", type: "Adventure" },
+
+      { name: "Dumas Beach", type: "Beach" },
+      { name: "Suvali Beach", type: "Beach" },
+      { name: "Ubhrat Beach", type: "Beach" },
+      { name: "Tithal Beach", type: "Beach" }
+    ]
+  },
+
+  ahmedabad: {
+    name: "Ahmedabad",
+    heroImage: "assets/images/cities/Ahmedabad.webp",
+    places: [
+      { name: "Kankaria Lake", type: "Park" },
+      { name: "Riverfront", type: "Park" },
+      { name: "Parimal Garden", type: "Park" },
+      { name: "Vastrapur Lake", type: "Park" },
+
+      { name: "Polo Forest", type: "Hill Station" },
+      { name: "Mount Abu", type: "Hill Station" },
+      { name: "Zanzari Hills", type: "Hill Station" },
+      { name: "Saputara", type: "Hill Station" },
+
+      { name: "Akshardham Temple", type: "Temple" },
+      { name: "ISKCON Temple", type: "Temple" },
+      { name: "Bhadra Kali", type: "Temple" },
+      { name: "Kalupur Temple", type: "Temple" },
+
+      { name: "Project Cafe", type: "Cafe" },
+      { name: "Mocha", type: "Cafe" },
+      { name: "Dark Roast", type: "Cafe" },
+      { name: "Java+", type: "Cafe" },
+
+      { name: "Sabarmati Ashram", type: "Museum" },
+      { name: "Calico Museum", type: "Museum" },
+      { name: "Auto World", type: "Museum" },
+      { name: "Science City", type: "Museum" },
+
+      { name: "Zanzari Falls", type: "Waterfall" },
+      { name: "Hathni Mata Falls", type: "Waterfall" },
+      { name: "Polo Forest Falls", type: "Waterfall" },
+      { name: "Dev Dam Falls", type: "Waterfall" },
+
+      { name: "Shott", type: "Adventure" },
+      { name: "Fun Blast", type: "Adventure" },
+      { name: "Snow Park", type: "Adventure" },
+      { name: "Adventure Village", type: "Adventure" },
+
+      { name: "Diu Beach", type: "Beach" },
+      { name: "Tithal Beach", type: "Beach" },
+      { name: "Mandvi Beach", type: "Beach" },
+      { name: "Ghoghla Beach", type: "Beach" }
+    ]
+  },
+
+  vadodara: {
+    name: "Vadodara",
+    heroImage: "assets/images/cities/Vadodara.jpg",
+    places: [
+      { name: "Sayaji Garden", type: "Park" },
+      { name: "Ajwa Garden", type: "Park" },
+      { name: "Nehru Garden", type: "Park" },
+      { name: "Harni Lake", type: "Park" },
+
+      { name: "Pavagadh Hills", type: "Hill Station" },
+      { name: "Saputara", type: "Hill Station" },
+      { name: "Wilson Hills", type: "Hill Station" },
+      { name: "Dang Hills", type: "Hill Station" },
+
+      { name: "Mahakali Temple", type: "Temple" },
+      { name: "EME Temple", type: "Temple" },
+      { name: "ISKCON Vadodara", type: "Temple" },
+      { name: "Swaminarayan Temple", type: "Temple" },
+
+      { name: "Cafe Fitoor", type: "Cafe" },
+      { name: "Barbeque Cafe", type: "Cafe" },
+      { name: "CCD Vadodara", type: "Cafe" },
+      { name: "Curators Cafe", type: "Cafe" },
+
+      { name: "Laxmi Vilas Palace", type: "Museum" },
+      { name: "Baroda Museum", type: "Museum" },
+      { name: "Fateh Singh Museum", type: "Museum" },
+      { name: "Maharaja Museum", type: "Museum" },
+
+      { name: "Zarwani Falls", type: "Waterfall" },
+      { name: "Jambughoda Falls", type: "Waterfall" },
+      { name: "Hathni Mata Falls", type: "Waterfall" },
+      { name: "Dev Dam Falls", type: "Waterfall" },
+
+      { name: "Fun Time Arena", type: "Adventure" },
+      { name: "Water Park", type: "Adventure" },
+      { name: "Adventure Village", type: "Adventure" },
+      { name: "Trekking Pavagadh", type: "Adventure" },
+
+      { name: "Tithal Beach", type: "Beach" },
+      { name: "Daman Beach", type: "Beach" },
+      { name: "Ubhrat Beach", type: "Beach" },
+      { name: "Jampore Beach", type: "Beach" }
+    ]
+  }
+};
+
+// ================= LOGIC =================
+
+const params = new URLSearchParams(window.location.search);
+const cityId = params.get("city");
+const category = params.get("category");
+
+const title = document.getElementById("categoryTitle");
+const cityText = document.getElementById("cityName");
+const grid = document.getElementById("placeGrid");
+
+const city = cityExplorerData[cityId];
+
+if (!city) {
+  title.innerText = "City not found ❌";
+} else {
+
+  title.innerText = category;
+  cityText.innerText = "Explore " + category + " in " + city.name;
+
+  const filtered = city.places.filter(p => p.type === category);
+
+  if (filtered.length === 0) {
+    grid.innerHTML = "<p>No places found 😢</p>";
+  }
+
+  filtered.forEach((place, index) => {
+
+    const card = document.createElement("div");
+    card.className = "place-card";
+    card.style.animationDelay = (index * 0.1) + "s";
+
+    card.innerHTML = `
+      <img src="https://source.unsplash.com/400x300/?${place.name},${category}" alt="${place.name}">
+      <div class="place-content">
+        <h3>${place.name}</h3>
+        <p>✨ Discover the beauty of ${place.name}, one of the best ${category.toLowerCase()} spots in ${city.name}. A perfect place to explore and relax.</p>
+        <a href="#" class="btn">Explore Now</a>
+      </div>
+    `;
+
+    grid.appendChild(card);
+
+  });
+}
+
+</script>
+
+</body>
+</html>
