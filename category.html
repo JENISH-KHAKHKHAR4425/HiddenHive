@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Category | HiddenHive — Hidden Gems of Gujarat</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════
+   DARK THEME ROOT PALETTE
+   ═══════════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --bg-base:       #0b0904;
+  --bg-surface:    #111009;
+  --bg-card:       #18150f;
+  --bg-card-hover: #1e1a12;
+  --bg-input:      #201c14;
+  --ochre:         #c8862a;
+  --saffron:       #e8a020;
+  --terracotta:    #b85c38;
+  --leaf:          #3d6b35;
+  --sky:           #2a6896;
+  --text-primary:  #f0e8d8;
+  --text-heading:  #f5e8c8;
+  --text-muted:    #9a8060;
+  --text-faint:    #5a4830;
+  --border-subtle: rgba(200,134,42,0.12);
+  --border-mid:    rgba(200,134,42,0.22);
+  --border-strong: rgba(200,134,42,0.38);
+  --cream:         #0b0904;
+  --deep:          #0d0a05;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════
+   AMBIENT GLOWS
+   ═══════════════════════════════════════════ */
+.bg-ornament {
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+}
+.ornament-tl {
+  top: -120px; left: -120px;
+  width: 520px; height: 520px;
+  background: radial-gradient(circle, rgba(200,134,42,0.18), transparent 70%);
+  filter: blur(70px);
+}
+.ornament-br {
+  bottom: -160px; right: -160px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(184,92,56,0.14), transparent 70%);
+  filter: blur(90px);
+}
+.ornament-mid {
+  top: 40%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px; height: 400px;
+  background: radial-gradient(ellipse, rgba(200,134,42,0.05), transparent 70%);
+  filter: blur(50px);
+}
+
+/* ═══════════════════════════════════════════
+   NAVBAR
+   ═══════════════════════════════════════════ */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 48px;
+  background: rgba(8, 6, 3, 0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-mid);
+  transition: background 0.3s;
+  animation: navFadeDown 0.7s ease both;
+}
+@keyframes navFadeDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.navbar:hover { background: rgba(8, 6, 3, 0.98); }
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.7rem;
+  color: #fff;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+.logo span { color: var(--saffron); }
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+  align-items: center;
+}
+.nav-links a {
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  font-size: 0.88rem;
+  letter-spacing: 0.4px;
+  position: relative;
+  transition: color 0.2s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 2px;
+  background: var(--saffron);
+  transition: width 0.3s;
+}
+.nav-links a:hover { color: #fff; }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta {
+  background: linear-gradient(135deg, var(--terracotta), var(--ochre));
+  color: #fff !important;
+  padding: 9px 22px;
+  border-radius: 30px;
+  font-weight: 500;
+  font-size: 0.84rem !important;
+  letter-spacing: 0.3px;
+  transition: all 0.25s !important;
+  box-shadow: 0 4px 18px rgba(184,92,56,0.45);
+}
+.nav-cta:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 28px rgba(184,92,56,0.65) !important;
+}
+.nav-cta::after { display: none !important; }
+
+/* ═══════════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════════ */
+.hero {
+  position: relative;
+  height: 88vh;
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background: linear-gradient(160deg, #0a0602 0%, #180e04 40%, #221508 100%);
+  background-size: cover;
+  background-position: center;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(8,5,2,0.80) 0%,
+    rgba(8,5,2,0.40) 45%,
+    rgba(15,9,3,0.28) 75%,
+    transparent 100%
+  );
+  z-index: 1;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 220px;
+  background: linear-gradient(to top, var(--bg-base), transparent);
+  z-index: 2;
+}
+.hero-pattern {
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    radial-gradient(circle at 20% 60%, rgba(200,134,42,0.24) 0%, transparent 50%),
+    radial-gradient(circle at 75% 25%, rgba(184,92,56,0.18) 0%, transparent 40%);
+}
+.hero-grid {
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(200,134,42,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,134,42,0.07) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.hero-content {
+  position: relative;
+  z-index: 3;
+  max-width: 820px;
+  padding: 0 24px;
+  animation: heroReveal 1s ease both 0.3s;
+}
+@keyframes heroReveal {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(200,134,42,0.18);
+  border: 1px solid rgba(200,134,42,0.45);
+  color: var(--saffron);
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 20px;
+  margin-bottom: 22px;
+}
+.hero-content h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 16px;
+  line-height: 1.12;
+  text-shadow: 0 4px 32px rgba(0,0,0,0.55);
+  letter-spacing: 0.5px;
+}
+.hero-content h1 em {
+  color: var(--saffron);
+  font-style: italic;
+}
+.hero-content p {
+  font-size: 1.12rem;
+  color: rgba(255,255,255,0.58);
+  font-weight: 300;
+  letter-spacing: 0.4px;
+  line-height: 1.75;
+}
+.scroll-hint {
+  position: absolute;
+  bottom: 48px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255,255,255,0.4);
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: scrollBounce 2.2s ease-in-out infinite;
+}
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.4; }
+  50%       { transform: translateX(-50%) translateY(10px); opacity: 0.9; }
+}
+.scroll-hint::after { content: '↓'; font-size: 1.4rem; }
+
+/* ═══════════════════════════════════════════
+   BREADCRUMB
+   ═══════════════════════════════════════════ */
+.breadcrumb {
+  position: relative;
+  z-index: 10;
+  max-width: 1400px;
+  margin: -32px auto 52px;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.86rem;
+  color: var(--text-muted);
+}
+.breadcrumb a {
+  color: var(--ochre);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.breadcrumb a:hover { color: var(--saffron); }
+.breadcrumb span { opacity: 0.4; }
+
+/* ═══════════════════════════════════════════
+   SECTION
+   ═══════════════════════════════════════════ */
+.section {
+  position: relative;
+  padding: 72px 48px 120px;
+  z-index: 10;
+}
+.section-header {
+  max-width: 1400px;
+  margin: 0 auto 56px;
+  text-align: center;
+}
+.section-eyebrow {
+  font-size: 0.73rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.section-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+.section-header h2 span { color: var(--ochre); }
+.section-header p {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.75;
+}
+.count-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  background: rgba(200,134,42,0.12);
+  border: 1px solid rgba(200,134,42,0.3);
+  color: var(--saffron);
+  font-size: 0.82rem;
+  padding: 5px 16px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════
+   PLACE GRID
+   ═══════════════════════════════════════════ */
+.place-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+/* ═══════════════════════════════════════════
+   PLACE CARDS - SIMPLIFIED DESIGN
+   ═══════════════════════════════════════════ */
+.place-card {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 4px 28px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.02) inset;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: cardReveal 0.65s ease both;
+  animation-delay: calc(var(--index, 0) * 0.08s);
+  cursor: pointer;
+}
+@keyframes cardReveal {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.place-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(200,134,42,0.22);
+  border-color: var(--border-mid);
+  background: var(--bg-card-hover);
+}
+.place-image-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 75%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1a1208, #2d1c0a);
+}
+.place-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.place-card:hover img { transform: scale(1.08); }
+.place-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(5,3,1,0.92) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0) 100%);
+  transition: opacity 0.3s;
+}
+.place-img-cta {
+  position: absolute;
+  bottom: 14px; right: 14px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.22);
+  color: #fff;
+  font-size: 0.74rem;
+  padding: 7px 14px;
+  border-radius: 20px;
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.place-card:hover .place-img-cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+.place-img-cta:hover { background: var(--ochre); border-color: var(--ochre); }
+
+.place-content {
+  padding: 20px 20px 18px;
+  border-top: 1px solid var(--border-subtle);
+}
+.place-content h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.28rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: 10px;
+  line-height: 1.25;
+}
+.place-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.place-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ═══════════════════════════════════════════
+   EMPTY STATE
+   ═══════════════════════════════════════════ */
+.empty-state {
+  text-align: center;
+  padding: 100px 40px;
+  grid-column: 1 / -1;
+}
+.empty-state-icon {
+  font-size: 4rem;
+  margin-bottom: 22px;
+  opacity: 0.25;
+}
+.empty-state h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: var(--text-heading);
+  margin-bottom: 12px;
+}
+.empty-state p {
+  font-size: 1rem;
+  color: var(--text-muted);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+/* ═══════════════════════════════════════════
+   HIGHLIGHT BANNER
+   ═══════════════════════════════════════════ */
+.cat-highlight {
+  background: linear-gradient(180deg, #0a0702, #070502);
+  padding: 56px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--border-mid);
+  border-bottom: 1px solid var(--border-mid);
+  position: relative;
+  z-index: 10;
+}
+.cat-highlight::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle at 10% 50%, rgba(200,134,42,0.12) 0%, transparent 50%),
+    radial-gradient(circle at 90% 50%, rgba(184,92,56,0.10) 0%, transparent 40%);
+  pointer-events: none;
+}
+.hl-left h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: #fff;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.hl-left p {
+  color: rgba(255,255,255,0.38);
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.7;
+  max-width: 380px;
+}
+.hl-stats { display: flex; gap: 40px; }
+.hl-stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  color: var(--saffron);
+  font-weight: 700;
+  line-height: 1;
+}
+.hl-stat-label {
+  color: rgba(255,255,255,0.3);
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  margin-top: 5px;
+}
+.hl-cta {
+  background: linear-gradient(135deg, var(--terracotta), var(--ochre));
+  color: #fff;
+  padding: 13px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.25s;
+  box-shadow: 0 4px 20px rgba(200,134,42,0.45);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.hl-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(200,134,42,0.62);
+}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════ */
+.footer {
+  background: #070503;
+  padding: 52px 48px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 44px;
+  position: relative;
+  z-index: 10;
+  border-top: 1px solid var(--border-subtle);
+}
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: #fff;
+  margin-bottom: 14px;
+}
+.footer-logo span { color: var(--saffron); }
+.footer-desc {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.28);
+  line-height: 1.8;
+  max-width: 280px;
+  font-weight: 300;
+}
+.footer-col h4 {
+  font-size: 0.73rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--saffron);
+  margin-bottom: 18px;
+}
+.footer-col a {
+  display: block;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.32);
+  text-decoration: none;
+  margin-bottom: 11px;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: rgba(255,255,255,0.82); }
+.footer-bottom {
+  background: #040302;
+  padding: 18px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  position: relative;
+  z-index: 10;
+}
+.footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.2); }
+.footer-tags { display: flex; gap: 8px; }
+.ftag {
+  font-size: 0.72rem;
+  border: 1px solid rgba(200,134,42,0.22);
+  color: rgba(200,134,42,0.52);
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+
+/* ═══════════════════════════════════════════
+   PLACE DETAIL MODAL
+   ═══════════════════════════════════════════ */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(4,2,1,0.90);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.38s cubic-bezier(0.4,0,0.2,1);
+}
+.modal-backdrop.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.place-modal {
+  background: linear-gradient(160deg, #1c1409, #120e07 60%, #0e0b06);
+  border: 1px solid rgba(200,134,42,0.30);
+  border-radius: 22px;
+  width: 100%;
+  max-width: 580px;
+  overflow: hidden;
+  transform: translateY(36px) scale(0.96);
+  transition: transform 0.38s cubic-bezier(0.34,1.28,0.64,1);
+  box-shadow:
+    0 40px 100px rgba(0,0,0,0.75),
+    0 0 0 1px rgba(200,134,42,0.07) inset,
+    0 1px 0 rgba(255,220,120,0.06) inset;
+  max-height: 92vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.place-modal::-webkit-scrollbar { display: none; }
+.modal-backdrop.open .place-modal {
+  transform: translateY(0) scale(1);
+}
+
+/* Modal Image */
+.pm-img-wrap {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+  background: #0d0a05;
+  flex-shrink: 0;
+}
+.pm-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+.place-modal:hover .pm-img-wrap img { transform: scale(1.04); }
+.pm-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(12,8,3,0.97) 0%,
+    rgba(8,5,2,0.55) 40%,
+    rgba(0,0,0,0.10) 70%,
+    transparent 100%
+  );
+}
+.pm-img-sheen {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(200,134,42,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Modal top badge row */
+.pm-top-row {
+  position: absolute;
+  top: 16px; left: 16px; right: 54px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 4;
+}
+.pm-type-badge {
+  background: rgba(6,4,2,0.78);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.13);
+  color: rgba(255,255,255,0.86);
+  font-size: 0.65rem;
+  padding: 5px 13px;
+  border-radius: 12px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.pm-rating {
+  background: rgba(200,134,42,0.92);
+  color: #fff;
+  font-size: 0.73rem;
+  font-weight: 600;
+  padding: 5px 11px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 2px 12px rgba(200,134,42,0.5);
+}
+
+/* Close button */
+.pm-close {
+  position: absolute;
+  top: 14px; right: 14px;
+  z-index: 5;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.72);
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.22s;
+  line-height: 1;
+}
+.pm-close:hover {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+  color: #fff;
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* Modal title block (overlaid on image) */
+.pm-img-name {
+  position: absolute;
+  bottom: 18px; left: 22px; right: 22px;
+  z-index: 4;
+}
+.pm-img-name h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.7rem;
+  color: #fff;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 6px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+}
+.pm-location-line {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.48);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.pm-loc-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--saffron);
+  flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(232,160,32,0.7);
+}
+
+/* Modal body */
+.pm-body {
+  padding: 12px 24px 26px;
+}
+.pm-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 0;
+  font-weight: 300;
+}
+.pm-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 0;
+}
+.pm-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(200,134,42,0.09);
+  border: 1px solid rgba(200,134,42,0.22);
+  border-radius: 22px;
+  padding: 7px 15px;
+  font-size: 0.77rem;
+  color: rgba(255,255,255,0.60);
+  transition: background 0.2s;
+}
+.pm-pill:hover { background: rgba(200,134,42,0.16); }
+.pm-pill-icon { font-size: 13px; }
+
+.pm-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-mid), transparent);
+  margin: 0 0 20px;
+}
+
+/* Map section */
+.pm-map-label {
+  font-size: 0.7rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  font-weight: 500;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pm-map-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-subtle);
+}
+.pm-map {
+  border-radius: 14px;
+  overflow: hidden;
+  height: 168px;
+  border: 1px solid var(--border-mid);
+  margin-bottom: 20px;
+  position: relative;
+  background: #0f0c07;
+  cursor: pointer;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.pm-map:hover {
+  border-color: rgba(200,134,42,0.55);
+  box-shadow: 0 0 24px rgba(200,134,42,0.12);
+}
+.pm-map iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  pointer-events: none;
+}
+.pm-map-glow {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(8,5,2,0.55), transparent 55%);
+  pointer-events: none;
+  z-index: 1;
+}
+.pm-map-pill {
+  position: absolute;
+  bottom: 11px; right: 11px;
+  background: rgba(200,134,42,0.92);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 5px 13px;
+  border-radius: 10px;
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+}
+
+/* Actions */
+.pm-actions {
+  display: flex;
+  gap: 10px;
+}
+.pm-btn-primary {
+  flex: 1;
+  background: linear-gradient(135deg, var(--terracotta), var(--ochre) 60%, var(--saffron));
+  color: #fff;
+  border: none;
+  border-radius: 11px;
+  padding: 13px 20px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s;
+  box-shadow: 0 4px 22px rgba(200,134,42,0.42);
+  letter-spacing: 0.2px;
+}
+.pm-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(200,134,42,0.62);
+}
+.pm-btn-secondary {
+  background: rgba(200,134,42,0.1);
+  color: var(--saffron);
+  border: 1px solid rgba(200,134,42,0.32);
+  border-radius: 11px;
+  padding: 13px 18px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.25s;
+  white-space: nowrap;
+}
+.pm-btn-secondary:hover {
+  background: rgba(200,134,42,0.18);
+  border-color: rgba(200,134,42,0.55);
+  transform: translateY(-1px);
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════ */
+@media (max-width: 1100px) {
+  .place-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 900px) {
+  .navbar { padding: 16px 24px; }
+  .breadcrumb { padding: 0 24px; }
+  .section { padding: 56px 24px 80px; }
+  .place-grid { grid-template-columns: 1fr; }
+  .cat-highlight { padding: 40px 24px; flex-direction: column; gap: 28px; }
+  .hl-stats { gap: 28px; }
+  .footer { grid-template-columns: 1fr; padding: 40px 24px 24px; }
+  .footer-bottom { padding: 16px 24px; flex-direction: column; gap: 10px; text-align: center; }
+  .pm-img-wrap { height: 200px; }
+  .pm-img-name h2 { font-size: 1.4rem; }
+}
+@media (max-width: 540px) {
+  .hero-content h1 { font-size: 2.2rem; }
+  .place-grid { gap: 18px; }
+  .pm-actions { flex-direction: column; }
+  .pm-btn-secondary { text-align: center; }
+}
+
+/* ═══════════════════════════════════════════
+   HAMBURGER MOBILE NAV
+   ═══════════════════════════════════════════ */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+}
+.hamburger span {
+  display: block;
+  width: 24px; height: 2px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+@media (max-width: 680px) {
+  .hamburger { display: flex; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: rgba(8,6,3,0.97);
+    border-bottom: 1px solid var(--border-mid);
+    padding: 16px 0;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links li { width: 100%; }
+  .nav-links a {
+    display: block;
+    padding: 12px 28px;
+    font-size: 0.95rem;
+  }
+  .nav-links a::after { display: none; }
+  .nav-cta {
+    margin: 8px 28px 4px;
+    text-align: center;
+    border-radius: 8px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Ambient glows -->
+<div class="bg-ornament ornament-tl"></div>
+<div class="bg-ornament ornament-br"></div>
+<div class="bg-ornament ornament-mid"></div>
+
+<!-- ═══ NAVBAR ═══ -->
+<header class="navbar">
+  <a class="logo" href="index.html">Hidden<span>Hive</span></a>
+  <div class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </div>
+  <nav>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="index.html#explore" class="nav-cta">Explore Gujarat</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="heroSection">
+  <div class="hero-pattern"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow" id="heroEyebrow">Discover</div>
+    <h1 id="categoryTitle">Category</h1>
+    <p id="heroSub">Curated hidden gems across Gujarat</p>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- ═══ BREADCRUMB ═══ -->
+<nav class="breadcrumb" data-aos="fade-right">
+  <a href="index.html">Home</a>
+  <span>›</span>
+  <a href="index.html#explore">Cities</a>
+  <span>›</span>
+  <span id="breadCity">City</span>
+  <span>›</span>
+  <span id="breadCategory">Category</span>
+</nav>
+
+<!-- ═══ PLACES SECTION ═══ -->
+<section class="section">
+  <div class="section-header" data-aos="fade-up">
+    <div class="section-eyebrow" id="sectionEyebrow">Hidden Gems</div>
+    <h2>Places Worth <span>Discovering</span></h2>
+    <p id="sectionDesc">Curated experiences crafted for the adventurous soul</p>
+    <div class="count-badge" id="countBadge">✦ Loading...</div>
+  </div>
+  <div class="place-grid" id="placeGrid"></div>
+</section>
+
+<!-- ═══ HIGHLIGHT BANNER ═══ -->
+<div class="cat-highlight" data-aos="fade-up">
+  <div class="hl-left">
+    <h3>Plan your<br/>Gujarat Journey</h3>
+    <p>Go beyond the tourist trail — every spot here is hand-picked and loved by locals.</p>
+  </div>
+  <div class="hl-stats">
+    <div>
+      <div class="hl-stat-num">33</div>
+      <div class="hl-stat-label">Districts</div>
+    </div>
+    <div>
+      <div class="hl-stat-num">200+</div>
+      <div class="hl-stat-label">Hidden Spots</div>
+    </div>
+    <div>
+      <div class="hl-stat-num">4</div>
+      <div class="hl-stat-label">Regions</div>
+    </div>
+  </div>
+  <a href="index.html#explore" class="hl-cta">Explore All Cities →</a>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div>
+    <div class="footer-logo">Hidden<span>Hive</span></div>
+    <p class="footer-desc">Uncovering secret spots, forgotten trails, and unforgettable experiences across the land of Gujarat.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Regions</h4>
+    <a href="index.html#explore">Central Gujarat</a>
+    <a href="index.html#explore">North Gujarat</a>
+    <a href="index.html#explore">Saurashtra &amp; Kutch</a>
+    <a href="index.html#explore">South Gujarat</a>
+  </div>
+  <div class="footer-col">
+    <h4>Explore</h4>
+    <a href="index.html#categories">Temples &amp; Heritage</a>
+    <a href="index.html#categories">Nature &amp; Wildlife</a>
+    <a href="index.html#categories">Food &amp; Culture</a>
+    <a href="about.html">About HiddenHive</a>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span class="footer-copy">© 2026 HiddenHive · Gujarat. All rights reserved.</span>
+  <div class="footer-tags">
+    <span class="ftag">Gujarat</span>
+    <span class="ftag">Hidden Gems</span>
+    <span class="ftag">Travel</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PLACE DETAIL MODAL
+     ═══════════════════════════════════════════ -->
+<div class="modal-backdrop" id="placeModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="pmName">
+  <div class="place-modal" id="placeModal">
+
+    <!-- Image hero -->
+    <div class="pm-img-wrap">
+      <img id="pmImg" src="" alt="">
+      <div class="pm-img-overlay"></div>
+      <div class="pm-img-sheen"></div>
+
+      <div class="pm-top-row">
+        <div class="pm-type-badge" id="pmBadge"></div>
+        <div class="pm-rating" id="pmRating"></div>
+      </div>
+
+      <button class="pm-close" id="pmClose" aria-label="Close modal">✕</button>
+
+      <div class="pm-img-name">
+        <h2 id="pmName"></h2>
+        <div class="pm-location-line">
+          <div class="pm-loc-dot"></div>
+          <span id="pmCity"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="pm-body">
+      <p class="pm-desc" id="pmDesc"></p>
+
+      <div class="pm-pills" id="pmPills"></div>
+
+      <div class="pm-divider"></div>
+
+      <!-- Map -->
+      <div class="pm-map-label">📍 Location on Map</div>
+      <div class="pm-map" id="pmMapWrap">
+        <iframe
+          id="pmMapIframe"
+          src=""
+          title="Place location map"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen>
+        </iframe>
+        <div class="pm-map-glow"></div>
+        <div class="pm-map-pill">🗺 Open in Maps</div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="pm-actions">
+        <button class="pm-btn-primary" id="pmMapsBtn">Open in Google Maps →</button>
+        <button class="pm-btn-secondary" id="pmShareBtn">Share ↗</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ SCRIPTS ═══ -->
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+<script>
+AOS.init({ duration: 1000, once: true, offset: 60 });
+
+/* ─── Mobile hamburger ─── */
+document.getElementById('hamburger').addEventListener('click', function () {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+/* ─── URL params ─── */
+const params   = new URLSearchParams(window.location.search);
+const cityId   = params.get("city");
+const category = params.get("category") || "Places";
+
+/* ─── Elements ─── */
+const heroEyebrow    = document.getElementById("heroEyebrow");
+const categoryTitle  = document.getElementById("categoryTitle");
+const heroSub        = document.getElementById("heroSub");
+const grid           = document.getElementById("placeGrid");
+const breadCity      = document.getElementById("breadCity");
+const breadCategory  = document.getElementById("breadCategory");
+const sectionEyebrow = document.getElementById("sectionEyebrow");
+const sectionDesc    = document.getElementById("sectionDesc");
+const countBadge     = document.getElementById("countBadge");
+const heroSection    = document.getElementById("heroSection");
+
+/* ─── Category emoji / eyebrow map ─── */
+const catMeta = {
+  "temples & shrines":  { emoji: "🛕", eyebrow: "Sacred Places" },
+  "nature & wildlife":  { emoji: "🏞️", eyebrow: "Into the Wild" },
+  "heritage & forts":   { emoji: "🏰", eyebrow: "Living History" },
+  "beaches & lakes":    { emoji: "🌊", eyebrow: "Water's Edge" },
+  "food & local eats":  { emoji: "🍲", eyebrow: "Taste of Gujarat" },
+  "arts & crafts":      { emoji: "🎨", eyebrow: "Creative Gujarat" },
+  "adventure & trek":   { emoji: "🏕️", eyebrow: "Go Wild" },
+  "sunrise spots":      { emoji: "🌄", eyebrow: "Golden Hours" },
+  "cafe":               { emoji: "☕", eyebrow: "Coffee Culture" },
+  "museum":             { emoji: "🏛️", eyebrow: "Cultural Heritage" },
+  "adventure":          { emoji: "⛰️", eyebrow: "Thrill Seekers" },
+};
+const catKey = category.toLowerCase();
+const meta   = catMeta[catKey] || { emoji: "📍", eyebrow: "Discover" };
+
+/* ─── City data ─── */
+const city = (typeof cityExplorerData !== 'undefined') ? cityExplorerData[cityId] : null;
+
+/* ─── Hero background ─── */
+if (city && city.heroImage) {
+  heroSection.style.backgroundImage    = `url(${city.heroImage})`;
+  heroSection.style.backgroundSize     = "cover";
+  heroSection.style.backgroundPosition = "center";
+}
+
+/* ─── Set hero / breadcrumb text ─── */
+heroEyebrow.innerHTML  = `<span style="margin-right:6px">${meta.emoji}</span> ${meta.eyebrow}`;
+categoryTitle.innerHTML = `<em>${category}</em>`;
+breadCategory.innerText = category;
+
+/* ════════════════════════════════════════════
+   PLACE DETAIL MODAL
+   ════════════════════════════════════════════ */
+const backdrop  = document.getElementById('placeModalBackdrop');
+const pmClose   = document.getElementById('pmClose');
+let currentMapsLink = '';
+
+function openPlaceModal(place, cityName) {
+  const mapQuery    = encodeURIComponent(place.name + ' ' + cityName + ' Gujarat India');
+  currentMapsLink   = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
+  const mapEmbedUrl = `https://maps.google.com/maps?q=${mapQuery}&output=embed&z=14`;
+
+  /* Populate image */
+  const imgEl    = document.getElementById('pmImg');
+  imgEl.src      = place.image || 'assets/images/default-place.jpg';
+  imgEl.alt      = place.name;
+
+  /* Badges */
+  document.getElementById('pmBadge').textContent  = `${meta.emoji} ${category}`;
+  const ratingEl = document.getElementById('pmRating');
+  if (place.rating) {
+    ratingEl.textContent = `★ ${place.rating}`;
+    ratingEl.style.display = 'flex';
+  } else {
+    ratingEl.style.display = 'none';
+  }
+
+  /* Title & location */
+  document.getElementById('pmName').textContent = place.name;
+  document.getElementById('pmCity').textContent = `${cityName}, Gujarat`;
+
+  /* Description */
+  const descEl = document.getElementById('pmDesc');
+  if (place.description) {
+    descEl.textContent = place.description;
+    descEl.style.display = 'block';
+  } else {
+    descEl.style.display = 'none';
+  }
+
+  /* Info pills */
+  const pillsEl  = document.getElementById('pmPills');
+  const pillData = [
+    place.distance ? { icon: '📍', text: place.distance }          : null,
+    place.bestTime ? { icon: '🕐', text: 'Best: ' + place.bestTime } : null,
+    place.rating   ? { icon: '⭐', text: 'Rated ' + place.rating }   : null,
+    place.entry    ? { icon: '🎟️', text: place.entry }               : null,
+  ].filter(Boolean);
+
+  pillsEl.innerHTML = pillData.map(i =>
+    `<div class="pm-pill"><span class="pm-pill-icon">${i.icon}</span>${i.text}</div>`
+  ).join('');
+
+  /* Map */
+  document.getElementById('pmMapIframe').src = mapEmbedUrl;
+
+  /* Map click → open Google Maps */
+  document.getElementById('pmMapWrap').onclick = () => window.open(currentMapsLink, '_blank');
+
+  /* Button handlers */
+  document.getElementById('pmMapsBtn').onclick = () => window.open(currentMapsLink, '_blank');
+  document.getElementById('pmShareBtn').onclick = () => {
+    const shareText = `Check out ${place.name} in ${cityName}, Gujarat! ${currentMapsLink}`;
+    if (navigator.share) {
+      navigator.share({ title: place.name, text: shareText, url: currentMapsLink });
+    } else {
+      window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
+    }
+  };
+
+  /* Open modal */
+  backdrop.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  /* Focus trap — focus close btn */
+  setTimeout(() => pmClose.focus(), 50);
+}
+
+function closePlaceModal() {
+  backdrop.classList.remove('open');
+  document.body.style.overflow = '';
+  /* Clear iframe after transition to stop map tile loading */
+  setTimeout(() => {
+    document.getElementById('pmMapIframe').src = '';
+  }, 420);
+}
+
+/* Close events */
+pmClose.addEventListener('click', closePlaceModal);
+backdrop.addEventListener('click', e => { if (e.target === backdrop) closePlaceModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePlaceModal(); });
+
+/* ════════════════════════════════════════════
+   RENDER PAGE - SIMPLIFIED CARDS
+   ════════════════════════════════════════════ */
+if (!city) {
+  /* City not found */
+  categoryTitle.innerText = "City Not Found";
+  heroSub.innerText       = "The requested destination could not be found.";
+  breadCity.innerText     = cityId || "Unknown";
+  countBadge.innerText    = "✦ 0 places";
+  sectionDesc.innerText   = "We couldn't locate this city.";
+
+  grid.innerHTML = `
+    <div class="empty-state">
+      <div class="empty-state-icon">🗺️</div>
+      <h3>Lost in Transit</h3>
+      <p>We couldn't locate this city. Please check your journey and try again.</p>
+    </div>`;
+
+} else {
+
+  heroSub.innerText        = `Explore ${category} in ${city.name}`;
+  breadCity.innerText      = city.name;
+  sectionEyebrow.innerText = city.name + " · " + meta.eyebrow;
+  sectionDesc.innerText    = `Hand-picked ${category.toLowerCase()} waiting to be explored in and around ${city.name}.`;
+
+  const filtered = city.places.filter(p => p.type.toLowerCase() === catKey);
+
+  countBadge.innerText = `✦ ${filtered.length} place${filtered.length !== 1 ? "s" : ""} found`;
+
+  if (filtered.length === 0) {
+
+    grid.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon">🔍</div>
+        <h3>None Found Yet</h3>
+        <p>We haven't uncovered any ${category.toLowerCase()} in ${city.name} yet.
+           Check back soon — new hidden gems are added regularly!</p>
+      </div>`;
+
+  } else {
+
+    filtered.forEach((place, index) => {
+
+      const card = document.createElement("div");
+      card.className = "place-card";
+      card.style.setProperty('--index', index);
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', `View details for ${place.name}`);
+
+      // SIMPLIFIED CARD - Only name, photo, and location
+      card.innerHTML = `
+        <div class="place-image-wrap">
+          <img src="${place.image || 'assets/images/default-place.jpg'}"
+               alt="${place.name}" loading="lazy">
+          <div class="place-img-overlay"></div>
+          <span class="place-img-cta">Quick Look →</span>
+        </div>
+        <div class="place-content">
+          <h3>${place.name}</h3>
+          <div class="place-meta">
+            <div class="place-meta-item">📍 ${city.name}, Gujarat</div>
+          </div>
+        </div>
+      `;
+
+      /* Click anywhere on card opens modal */
+      card.addEventListener('click', () => openPlaceModal(place, city.name));
+
+      /* Keyboard: Enter / Space also opens modal */
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openPlaceModal(place, city.name);
+        }
+      });
+
+      grid.appendChild(card);
+    });
+
+  }
+}
+
+/* ─── Parallax hero ─── */
+window.addEventListener('scroll', () => {
+  const scrolled = window.pageYOffset;
+  heroSection.style.backgroundPositionY = `calc(50% + ${scrolled * 0.38}px)`;
+});
+</script>
+
+</body>
+</html>

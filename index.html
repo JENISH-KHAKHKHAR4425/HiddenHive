@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HiddenHive — Hidden Gems of Gujarat</title>
+
+  <!-- AOS Library -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* ===== RESET & ROOT ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --sand:        #f5f0e8;
+      --ochre:       #c8862a;
+      --saffron:     #e8a020;
+      --terracotta:  #b85c38;
+      --deep:        #1a1208;
+      --leaf:        #3d6b35;
+      --sky:         #2a6896;
+      --cream:       #fdf8f0;
+      --text:        #2d1f0e;
+      --muted:       #7a6040;
+      --border:      #e8e0d0;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ===== CURSOR EFFECTS ===== */
+    .cursor-glow {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,160,32,0.15) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s;
+      opacity: 0;
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(26, 18, 8, 0);
+      backdrop-filter: blur(0px);
+      border-bottom: 1px solid rgba(200, 134, 42, 0);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .navbar.scrolled {
+      background: rgba(26, 18, 8, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(200, 134, 42, 0.3);
+      padding: 14px 48px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      color: #fff;
+      letter-spacing: 1px;
+      text-decoration: none;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+    .logo:hover { transform: scale(1.05); }
+    .logo span { 
+      color: var(--saffron);
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    .logo:hover span {
+      transform: rotate(-5deg) scale(1.1);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links li {
+      position: relative;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 0.88rem;
+      letter-spacing: 0.4px;
+      position: relative;
+      transition: color 0.3s ease;
+      padding: 8px 0;
+      display: block;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      width: 0; height: 2px;
+      background: linear-gradient(90deg, var(--saffron), var(--ochre));
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateX(-50%);
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--terracotta), var(--ochre));
+      color: #fff !important;
+      padding: 9px 22px;
+      border-radius: 30px;
+      font-weight: 500;
+      font-size: 0.84rem !important;
+      letter-spacing: 0.3px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      box-shadow: 0 4px 16px rgba(184,92,56,0.35);
+      position: relative;
+      overflow: hidden;
+    }
+    .nav-cta::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 0; height: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    .nav-cta:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+    .nav-cta:hover {
+      transform: translateY(-3px) scale(1.05) !important;
+      box-shadow: 0 12px 32px rgba(184,92,56,0.6) !important;
+    }
+    .nav-cta::after { display: none !important; }
+
+    /* ===== HERO ===== */
+    .hero {
+      height: 100vh;
+      min-height: 620px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      background: linear-gradient(160deg, #1a0e05 0%, #2d1a08 40%, #3d2510 100%);
+      overflow: hidden;
+    }
+
+    .hero-bg-img {
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: 55%;
+      background: url('assets/images/Gujarat.jpeg') center/cover no-repeat;
+      opacity: 0;
+      mask-image: linear-gradient(to right, transparent, rgba(0,0,0,0.8) 40%, black 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent, rgba(0,0,0,0.8) 40%, black 100%);
+      animation: heroImageFade 1.5s ease-out 0.5s forwards, subtleZoom 25s ease-in-out 1.5s infinite alternate;
+    }
+    @keyframes heroImageFade {
+      from { opacity: 0; transform: scale(1.1); }
+      to   { opacity: 0.5; transform: scale(1); }
+    }
+    @keyframes subtleZoom {
+      from { transform: scale(1); }
+      to   { transform: scale(1.08); }
+    }
+
+    .hero-pattern {
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 15% 55%, rgba(200,134,42,0.18) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(184,92,56,0.12) 0%, transparent 40%);
+      animation: patternPulse 8s ease-in-out infinite;
+    }
+    @keyframes patternPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(200,134,42,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,134,42,0.07) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridFloat 20s linear infinite;
+    }
+    @keyframes gridFloat {
+      from { background-position: 0 0; }
+      to { background-position: 60px 60px; }
+    }
+
+    /* Floating particles */
+    .hero-particles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--saffron);
+      border-radius: 50%;
+      opacity: 0;
+      animation: floatParticle 8s infinite;
+    }
+    @keyframes floatParticle {
+      0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.3; }
+      100% { transform: translateY(-100px) translateX(100px); opacity: 0; }
+    }
+    .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+    .particle:nth-child(2) { left: 25%; animation-delay: 2s; }
+    .particle:nth-child(3) { left: 50%; animation-delay: 4s; }
+    .particle:nth-child(4) { left: 75%; animation-delay: 6s; }
+    .particle:nth-child(5) { left: 90%; animation-delay: 1s; }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 660px;
+      padding: 0 48px;
+      animation: heroFadeUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(200,134,42,0.15);
+      border: 1px solid rgba(200,134,42,0.4);
+      color: var(--saffron);
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(232,160,32,0.4); }
+      50% { transform: scale(1.02); box-shadow: 0 0 20px 5px rgba(232,160,32,0); }
+    }
+    .hero-eyebrow::before { 
+      content: '✦'; 
+      font-size: 10px;
+      animation: spin 3s linear infinite;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 22px;
+    }
+    .hero-title em { 
+      color: var(--saffron);
+      font-style: italic;
+      display: inline-block;
+      animation: titleGlow 3s ease-in-out infinite;
+    }
+    @keyframes titleGlow {
+      0%, 100% { text-shadow: 0 0 10px rgba(232,160,32,0.3); }
+      50% { text-shadow: 0 0 30px rgba(232,160,32,0.6), 0 0 50px rgba(232,160,32,0.3); }
+    }
+
+    .hero-sub {
+      color: rgba(255,255,255,0.62);
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 36px;
+      max-width: 480px;
+      font-weight: 300;
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 52px;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--ochre), var(--saffron));
+      color: #fff;
+      padding: 13px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.92rem;
+      letter-spacing: 0.3px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 20px rgba(200,134,42,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-gold::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+    .btn-gold:hover::before {
+      left: 100%;
+    }
+    .btn-gold:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 12px 35px rgba(200,134,42,0.6);
+    }
+
+    .btn-ghost {
+      border: 1px solid rgba(255,255,255,0.28);
+      color: rgba(255,255,255,0.85);
+      padding: 13px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.92rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-ghost::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 0; height: 0;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    .btn-ghost:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+    .btn-ghost:hover {
+      border-color: rgba(255,255,255,0.6);
+      transform: translateY(-3px);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .stat-item {
+      position: relative;
+      padding: 8px 0;
+      transition: transform 0.3s ease;
+    }
+    .stat-item:hover {
+      transform: translateY(-5px);
+    }
+    .stat-item::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--saffron);
+      transition: width 0.4s ease;
+    }
+    .stat-item:hover::before {
+      width: 100%;
+    }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--saffron);
+      font-weight: 700;
+      line-height: 1;
+      display: inline-block;
+      animation: countUp 2s ease-out;
+    }
+    @keyframes countUp {
+      from { opacity: 0; transform: scale(0.5); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .stat-label {
+      color: rgba(255,255,255,0.42);
+      font-size: 0.76rem;
+      letter-spacing: 0.5px;
+      margin-top: 5px;
+    }
+
+    /* ===== SEARCH BAR ===== */
+    .search-outer {
+      background: var(--cream);
+      padding: 0 48px;
+      position: relative;
+    }
+    .search-wrap {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.10);
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 28px 32px;
+      transform: translateY(-44px);
+      position: relative;
+      z-index: 10;
+      border: 1px solid var(--border);
+      transition: all 0.4s ease;
+      animation: slideUp 0.8s ease-out;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(-44px); opacity: 1; }
+    }
+    .search-wrap:hover {
+      box-shadow: 0 30px 80px rgba(0,0,0,0.15);
+      transform: translateY(-48px);
+    }
+    .search-label {
+      font-size: 0.73rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+    .search-row { 
+      display: flex; 
+      gap: 10px;
+      position: relative;
+    }
+    .search-input {
+      flex: 1;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 13px 18px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text);
+      background: var(--cream);
+      outline: none;
+      transition: all 0.3s ease;
+    }
+    .search-input:focus { 
+      border-color: var(--ochre);
+      transform: scale(1.02);
+      box-shadow: 0 5px 20px rgba(200,134,42,0.15);
+    }
+    .search-btn {
+      background: var(--terracotta);
+      color: #fff;
+      border: none;
+      padding: 13px 26px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+    }
+    .search-btn::after {
+      content: '→';
+      position: absolute;
+      right: 20px;
+      transition: transform 0.3s ease;
+    }
+    .search-btn:hover::after {
+      transform: translateX(5px);
+    }
+    .search-btn:hover { 
+      background: var(--ochre);
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(200,134,42,0.3);
+    }
+    .search-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+      align-items: center;
+    }
+    .chips-label { font-size: 0.78rem; color: var(--muted); }
+    .chip {
+      font-size: 0.78rem;
+      padding: 5px 14px;
+      border-radius: 20px;
+      border: 1px solid #e0d5c0;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      background: transparent;
+      position: relative;
+      overflow: hidden;
+    }
+    .chip::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 0; height: 0;
+      background: #fdf0df;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.4s, height 0.4s;
+    }
+    .chip:hover::before {
+      width: 200px;
+      height: 200px;
+    }
+    .chip:hover { 
+      border-color: var(--ochre);
+      color: var(--ochre);
+      transform: translateY(-2px);
+    }
+
+    /* ===== CATEGORIES ===== */
+    .categories-section {
+      background: var(--deep);
+      padding: 72px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .categories-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(circle at 30% 50%, rgba(200,134,42,0.05) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .section-eyebrow {
+      font-size: 0.73rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      line-height: 1.25;
+    }
+    .section-title span { 
+      color: var(--ochre);
+      position: relative;
+      display: inline-block;
+    }
+    .section-title span::after {
+      content: '';
+      position: absolute;
+      bottom: -5px; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--ochre), transparent);
+      animation: underlineExpand 2s ease-in-out infinite;
+    }
+    @keyframes underlineExpand {
+      0%, 100% { width: 100%; }
+      50% { width: 60%; }
+    }
+    .section-sub {
+      font-size: 0.95rem;
+      margin-top: 10px;
+      max-width: 520px;
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 40px;
+    }
+    .cat-card {
+      border: 1px solid rgba(200,134,42,0.2);
+      border-radius: 16px;
+      padding: 28px 22px;
+      cursor: pointer;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      text-align: center;
+      background: rgba(255,255,255,0.04);
+      position: relative;
+      overflow: hidden;
+    }
+    .cat-card::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 0; height: 0;
+      background: radial-gradient(circle, rgba(200,134,42,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    .cat-card:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+    .cat-card:hover {
+      background: rgba(200,134,42,0.12);
+      border-color: rgba(200,134,42,0.5);
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    .cat-icon { 
+      font-size: 2rem;
+      margin-bottom: 12px;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .cat-card:hover .cat-icon {
+      transform: scale(1.2) rotate(10deg);
+    }
+    .cat-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: #fff;
+      margin-bottom: 6px;
+      transition: color 0.3s ease;
+    }
+    .cat-card:hover .cat-name {
+      color: var(--saffron);
+    }
+    .cat-count { 
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.38);
+      transition: color 0.3s ease;
+    }
+    .cat-card:hover .cat-count {
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* ===== REGION SECTIONS ===== */
+    .region-section { 
+      padding: 64px 48px;
+      position: relative;
+    }
+    .region-section.alt { background: #f4f0e8; }
+
+    .region-head {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 32px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #ede5d0;
+      position: relative;
+    }
+    .region-head::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 2px;
+      background: linear-gradient(90deg, var(--ochre), transparent);
+      transition: width 1s ease;
+    }
+    .region-head.in-view::after {
+      width: 200px;
+    }
+    .region-icon {
+      width: 50px; height: 50px;
+      border-radius: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      transition: transform 0.4s ease;
+      animation: iconBounce 2s ease-in-out infinite;
+    }
+    @keyframes iconBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    .region-icon.central  { background: #fdf0df; }
+    .region-icon.north    { background: #e8f0e8; }
+    .region-icon.saura    { background: #e8f4fd; }
+    .region-icon.south    { background: #fde8e8; }
+
+    .region-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.65rem;
+      color: var(--deep);
+    }
+    .region-count { 
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    /* ===== CITY CARDS ===== */
+    .city-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .city-card {
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      background: #fff;
+      height: 220px;
+    }
+    .city-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, rgba(200,134,42,0.2) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: 1;
+    }
+    .city-card:hover::before {
+      opacity: 1;
+    }
+    .city-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+    }
+    .city-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .city-card:hover img { 
+      transform: scale(1.15);
+    }
+
+    .city-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(20,10,0,0.85) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 80%);
+      z-index: 2;
+    }
+    .city-body {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 18px 16px;
+      z-index: 3;
+      transform: translateY(0);
+      transition: transform 0.4s ease;
+    }
+    .city-card:hover .city-body {
+      transform: translateY(-5px);
+    }
+    .city-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    .city-sub { 
+      font-size: 0.73rem;
+      color: rgba(255,255,255,0.62);
+      line-height: 1.5;
+    }
+
+    .city-btn {
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.16);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.28);
+      color: #fff;
+      font-size: 0.74rem;
+      padding: 6px 14px;
+      border-radius: 20px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .city-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 0; height: 0;
+      background: var(--ochre);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.4s, height 0.4s;
+    }
+    .city-btn:hover::before {
+      width: 200px;
+      height: 200px;
+    }
+    .city-btn:hover { 
+      border-color: var(--ochre);
+      transform: scale(1.05);
+    }
+
+    .city-badge {
+      position: absolute;
+      top: 12px; left: 12px;
+      z-index: 4;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      font-size: 0.67rem;
+      padding: 4px 10px;
+      border-radius: 12px;
+      letter-spacing: 0.5px;
+      animation: badgePulse 3s ease-in-out infinite;
+    }
+    @keyframes badgePulse {
+      0%, 100% { opacity: 0.9; }
+      50% { opacity: 1; box-shadow: 0 0 15px rgba(255,255,255,0.5); }
+    }
+
+    /* ===== HIGHLIGHT STRIP ===== */
+    .highlight {
+      background: linear-gradient(135deg, var(--terracotta) 0%, var(--ochre) 100%);
+      padding: 70px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 52px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .highlight::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: floatCircle 15s ease-in-out infinite;
+    }
+    @keyframes floatCircle {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-50px, 50px) scale(1.1); }
+    }
+    .hl-text {
+      position: relative;
+      z-index: 2;
+    }
+    .hl-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+    .hl-text p {
+      color: rgba(255,255,255,0.72);
+      font-size: 0.96rem;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+    .hl-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .hl-feat {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.12);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    .hl-feat:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateX(5px);
+    }
+    .hl-feat-icon { 
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+      transition: transform 0.3s ease;
+    }
+    .hl-feat:hover .hl-feat-icon {
+      transform: scale(1.2) rotate(10deg);
+    }
+    .hl-feat-label {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.48);
+      margin-bottom: 2px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .hl-feat-text { 
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.5;
+    }
+
+    .hl-visual {
+      border-radius: 20px;
+      overflow: hidden;
+      height: 330px;
+      background: url('assets/images/Main.jfif') center/cover;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      transition: transform 0.5s ease;
+    }
+    .hl-visual:hover {
+      transform: scale(1.05) rotate(2deg);
+    }
+    .hl-visual::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(184,92,56,0.35), transparent);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--deep);
+      padding: 52px 48px 36px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 44px;
+      position: relative;
+      overflow: hidden;
+    }
+    .footer::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 2px;
+      background: linear-gradient(90deg, var(--ochre), transparent);
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: #fff;
+      margin-bottom: 14px;
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+    .footer-logo:hover {
+      transform: scale(1.05);
+    }
+    .footer-logo span { color: var(--saffron); }
+    .footer-desc {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.8;
+      max-width: 280px;
+      font-weight: 300;
+    }
+    .footer-col h4 {
+      font-size: 0.73rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--saffron);
+      margin-bottom: 18px;
+    }
+    .footer-col a {
+      display: block;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.42);
+      text-decoration: none;
+      margin-bottom: 11px;
+      transition: all 0.3s ease;
+      position: relative;
+      padding-left: 0;
+    }
+    .footer-col a::before {
+      content: '→';
+      position: absolute;
+      left: -20px;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    .footer-col a:hover {
+      color: rgba(255,255,255,0.85);
+      padding-left: 20px;
+    }
+    .footer-col a:hover::before {
+      left: 0;
+      opacity: 1;
+    }
+
+    .footer-bottom {
+      background: #110d05;
+      padding: 18px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-copy { 
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.28);
+    }
+    .footer-tags { display: flex; gap: 8px; }
+    .ftag {
+      font-size: 0.72rem;
+      border: 1px solid rgba(200,134,42,0.25);
+      color: rgba(200,134,42,0.6);
+      padding: 4px 12px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+    .ftag:hover {
+      border-color: rgba(200,134,42,0.6);
+      color: rgba(200,134,42,0.9);
+      transform: translateY(-2px);
+    }
+
+    /* ===== SCROLL PROGRESS BAR ===== */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--ochre), var(--saffron));
+      z-index: 10000;
+      transition: width 0.1s ease;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1100px) {
+      .city-grid  { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .navbar     { padding: 16px 24px; }
+      .hero-bg-img { display: none; }
+      .hero-content { padding: 0 28px; }
+      .search-outer { padding: 0 24px; }
+      .search-wrap  { padding: 22px 20px; }
+      .categories-section { padding: 52px 24px; }
+      .cat-grid     { grid-template-columns: repeat(2, 1fr); }
+      .region-section { padding: 48px 24px; }
+      .city-grid    { grid-template-columns: repeat(2, 1fr); }
+      .highlight    { grid-template-columns: 1fr; padding: 48px 24px; }
+      .hl-visual    { height: 240px; }
+      .footer       { grid-template-columns: 1fr; padding: 40px 24px 24px; }
+      .footer-bottom { padding: 16px 24px; flex-direction: column; gap: 10px; text-align: center; }
+    }
+    @media (max-width: 540px) {
+      .city-grid  { grid-template-columns: 1fr; }
+      .cat-grid   { grid-template-columns: 1fr 1fr; }
+      .hero-stats { gap: 24px; }
+      .hl-features { grid-template-columns: 1fr; }
+      .hero-title { font-size: 2.1rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Cursor Glow Effect -->
+<div class="cursor-glow"></div>
+
+<!-- Scroll Progress Bar -->
+<div class="scroll-progress"></div>
+
+<!-- ===== AUTH GUARD ===== -->
+<script>
+  if (!localStorage.getItem("isLoggedIn")) {
+    window.location.href = "login.html";
+  }
+</script>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar" data-aos="fade-down">
+  <a class="logo" href="index.html">Hidden<span>Hive</span></a>
+  <nav>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li id="userSection"></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="hero-bg-img"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
+  <div class="hero-content">
+    <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
+      Uncover the<br/><em>Hidden Gems</em><br/>of Gujarat
+    </h1>
+    <p class="hero-sub" data-aos="fade-up" data-aos-delay="300">
+      From the salt flats of Kutch to the temples of Somnath — discover secret spots, forgotten trails, and unforgettable experiences across 33 districts.
+    </p>
+    <div class="hero-actions" data-aos="fade-up" data-aos-delay="400">
+      <a href="#explore" class="btn-gold">Explore All Cities →</a>
+      <a href="#categories" class="btn-ghost">Browse by Type</a>
+    </div>
+    <div class="hero-stats" data-aos="fade-up" data-aos-delay="500">
+      <div class="stat-item">
+        <div class="stat-num">33</div>
+        <div class="stat-label">Districts</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">200+</div>
+        <div class="stat-label">Hidden Spots</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Regions</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CATEGORIES ===== -->
+<section class="categories-section" id="categories">
+  <div data-aos="fade-up">
+    <div class="section-eyebrow" style="color:var(--saffron)">What are you looking for?</div>
+    <div class="section-title" style="color:#fff">Browse by <span>Category</span></div>
+    <div class="section-sub" style="color:rgba(255,255,255,0.45)">
+      From sacred temples to serene beaches — Gujarat has something for every kind of traveller.
+    </div>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card" data-aos="fade-up" data-aos-delay="0">
+      <span class="cat-icon">🛕</span>
+      <div class="cat-name">Temples &amp; Shrines</div>
+      <div class="cat-count">48 places</div>
+    </div>
+    <div class="cat-card" data-aos="fade-up" data-aos-delay="60">
+      <span class="cat-icon">🏞️</span>
+      <div class="cat-name">Nature &amp; Wildlife</div>
+      <div class="cat-count">36 places</div>
+    </div>
+    <div class="cat-card" data-aos="fade-up" data-aos-delay="120">
+      <span class="cat-icon">🏰</span>
+      <div class="cat-name">Heritage &amp; Forts</div>
+      <div class="cat-count">29 places</div>
+    </div>
+    <div class="cat-card" data-aos="fade-up" data-aos-delay="180">
+      <span class="cat-icon">🌊</span>
+      <div class="cat-name">Beaches &amp; Lakes</div>
+      <div class="cat-count">22 places</div>
+    </div>
+    <div class="cat-card" data-aos="fade-up" data-aos-delay="240">
+      <span class="cat-icon">🍲</span>
+      <div class="cat-name">Food &amp; Local Eats</div>
+      <div class="cat-count">55 places</div>
+    </div>
+    <div class="cat-card" data-aos="fade-up" data-aos-delay="300">
+      <span class="cat-icon">🎨</span>
+      <div class="cat-name">Arts &amp; Crafts</div>
+      <div class="cat-count">18 places</div>
+    </div>
+    <div class="cat-card" data-aos="fade-up" data-aos-delay="360">
+      <span class="cat-icon">🏕️</span>
+      <div class="cat-name">Adventure &amp; Trek</div>
+      <div class="cat-count">14 places</div>
+    </div>
+    <div class="cat-card" data-aos="fade-up" data-aos-delay="420">
+      <span class="cat-icon">🌄</span>
+      <div class="cat-name">Sunrise Spots</div>
+      <div class="cat-count">11 places</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXPLORE ===== -->
+<div id="explore">
+
+  <!-- 🌆 CENTRAL GUJARAT -->
+  <section class="region-section">
+    <div class="region-head" data-aos="fade-right">
+      <div class="region-icon central">🌆</div>
+      <div>
+        <div class="region-title">Central Gujarat</div>
+        <div class="region-count">5 districts · 40+ hidden places</div>
+      </div>
+    </div>
+    <div class="city-grid">
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="0">
+        <img src="assets/images/cities/ahmedabad.webp" alt="Ahmedabad"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Heritage City</div>
+        <div class="city-body">
+          <div class="city-name">Ahmedabad</div>
+          <div class="city-sub">Sanand · Dholka · Viramgam</div>
+          <a href="city-details.html?city=ahmedabad" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="80">
+        <img src="assets/images/cities/Gandhinagar.jpg" alt="Gandhinagar"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Capital</div>
+        <div class="city-body">
+          <div class="city-name">Gandhinagar</div>
+          <div class="city-sub">Kalol · Dehgam</div>
+          <a href="city-details.html?city=gandhinagar" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="160">
+        <img src="assets/images/cities/Anand.webp" alt="Anand"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Milk Capital</div>
+        <div class="city-body">
+          <div class="city-name">Anand</div>
+          <div class="city-sub">Petlad · Borsad</div>
+          <a href="city-details.html?city=Anand" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="240">
+        <img src="assets/images/cities/Kheda.webp" alt="Kheda"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">River Town</div>
+        <div class="city-body">
+          <div class="city-name">Kheda</div>
+          <div class="city-sub">Nadiad · Mahudha</div>
+          <a href="city-details.html?city=kheda" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="320">
+        <img src="assets/images/cities/Mahisagar.jpg" alt="Mahisagar"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Riverside</div>
+        <div class="city-body">
+          <div class="city-name">Mahisagar</div>
+          <div class="city-sub">Lunawada · Balasinor</div>
+          <a href="city-details.html?city=Mahisagar" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 🏙️ NORTH GUJARAT -->
+  <section class="region-section alt">
+    <div class="region-head" data-aos="fade-right">
+      <div class="region-icon north">🏙️</div>
+      <div>
+        <div class="region-title">North Gujarat</div>
+        <div class="region-count">5 districts · 35+ hidden places</div>
+      </div>
+    </div>
+    <div class="city-grid">
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="0">
+        <img src="assets/images/cities/Banaskantha.jpg" alt="Banaskantha"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Border Town</div>
+        <div class="city-body">
+          <div class="city-name">Banaskantha</div>
+          <div class="city-sub">Palanpur · Deesa</div>
+          <a href="city-details.html?city=Banaskantha" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="80">
+        <img src="assets/images/cities/Mehsana.jpg" alt="Mehsana"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Heritage</div>
+        <div class="city-body">
+          <div class="city-name">Mehsana</div>
+          <div class="city-sub">Mehsana · Visnagar</div>
+          <a href="city-details.html?city=Mehsana" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="160">
+        <img src="assets/images/cities/Patan.jpg" alt="Patan"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">UNESCO Site</div>
+        <div class="city-body">
+          <div class="city-name">Patan</div>
+          <div class="city-sub">Patan · Siddhpur · Chanasma</div>
+          <a href="city-details.html?city=Patan" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="240">
+        <img src="assets/images/cities/Sabarkantha.jpg" alt="Sabarkantha"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Hill Region</div>
+        <div class="city-body">
+          <div class="city-name">Sabarkantha</div>
+          <div class="city-sub">Himatnagar · Prantij</div>
+          <a href="city-details.html?city=Sabarkantha" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="320">
+        <img src="assets/images/cities/Aravali.webp" alt="Aravalli"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Scenic</div>
+        <div class="city-body">
+          <div class="city-name">Aravalli</div>
+          <div class="city-sub">Modasa</div>
+          <a href="city-details.html?city=aravalli" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 🌴 SAURASHTRA & KUTCH -->
+  <section class="region-section">
+    <div class="region-head" data-aos="fade-right">
+      <div class="region-icon saura">🌴</div>
+      <div>
+        <div class="region-title">Saurashtra &amp; Kutch</div>
+        <div class="region-count">12 districts · 90+ hidden places</div>
+      </div>
+    </div>
+    <div class="city-grid">
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="0">
+        <img src="assets/images/cities/Rajkot.jpg" alt="Rajkot"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Cultural Hub</div>
+        <div class="city-body">
+          <div class="city-name">Rajkot</div>
+          <div class="city-sub">Rajkot · Gondal · Jetpur</div>
+          <a href="city-details.html?city=rajkot" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="60">
+        <img src="assets/images/cities/Morbi.jpg" alt="Morbi"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Clock City</div>
+        <div class="city-body">
+          <div class="city-name">Morbi</div>
+          <div class="city-sub">Morbi · Wankaner · Halvad</div>
+          <a href="city-details.html?city=morbi" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="120">
+        <img src="assets/images/cities/Amreli.jpg" alt="Amreli"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Coastal</div>
+        <div class="city-body">
+          <div class="city-name">Amreli</div>
+          <div class="city-sub">Amreli · Lathi · Rajula</div>
+          <a href="city-details.html?city=amreli" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="180">
+        <img src="assets/images/cities/Bhavnagar.jpg" alt="Bhavnagar"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Port City</div>
+        <div class="city-body">
+          <div class="city-name">Bhavnagar</div>
+          <div class="city-sub">Bhavnagar · Palitana · Talaja</div>
+          <a href="city-details.html?city=bhavnagar" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="240">
+        <img src="assets/images/cities/Botad'.avif" alt="Botad"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Temple Town</div>
+        <div class="city-body">
+          <div class="city-name">Botad</div>
+          <div class="city-sub">Botad · Gadhada · Barwala</div>
+          <a href="city-details.html?city=botad" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="300">
+        <img src="assets/images/cities/Gir Somnath.jfif" alt="Gir Somnath"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Sacred Land</div>
+        <div class="city-body">
+          <div class="city-name">Gir Somnath</div>
+          <div class="city-sub">Somnath · Veraval · Kodinar</div>
+          <a href="city-details.html?city=girsomnath" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="360">
+        <img src="assets/images/cities/Porbandar.jpg" alt="Porbandar"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Gandhi's Birthplace</div>
+        <div class="city-body">
+          <div class="city-name">Porbandar</div>
+          <div class="city-sub">Porbandar · Ranavav · Kutiyana</div>
+          <a href="city-details.html?city=porbandar" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="420">
+        <img src="assets/images/cities/Surendranagar.jpg" alt="Surendranagar"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Salt Plains</div>
+        <div class="city-body">
+          <div class="city-name">Surendranagar</div>
+          <div class="city-sub">Surendranagar · Wadhwan · Limbdi</div>
+          <a href="city-details.html?city=surendranagar" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="480">
+        <img src="assets/images/cities/Junagadh.webp" alt="Junagadh"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Mountain City</div>
+        <div class="city-body">
+          <div class="city-name">Junagadh</div>
+          <div class="city-sub">Junagadh · Veraval</div>
+          <a href="city-details.html?city=junagadh" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="540">
+        <img src="assets/images/cities/Jamnagar.webp" alt="Jamnagar"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Marine Park</div>
+        <div class="city-body">
+          <div class="city-name">Jamnagar</div>
+          <div class="city-sub">Jamnagar City</div>
+          <a href="city-details.html?city=jamnagar" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="600">
+        <img src="assets/images/cities/Kutch.jfif" alt="Kutch"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">White Desert</div>
+        <div class="city-body">
+          <div class="city-name">Kutch</div>
+          <div class="city-sub">Bhuj · Mandvi</div>
+          <a href="city-details.html?city=kutch" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="660">
+        <img src="assets/images/cities/Dwarka.jpg" alt="Dwarka"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Pilgrimage</div>
+        <div class="city-body">
+          <div class="city-name">Dwarka</div>
+          <div class="city-sub">Devbhoomi Dwarka</div>
+          <a href="city-details.html?city=dwarka" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 🌊 SOUTH GUJARAT -->
+  <section class="region-section alt">
+    <div class="region-head" data-aos="fade-right">
+      <div class="region-icon south">🌊</div>
+      <div>
+        <div class="region-title">South Gujarat</div>
+        <div class="region-count">7 districts · 45+ hidden places</div>
+      </div>
+    </div>
+    <div class="city-grid">
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="0">
+        <img src="assets/images/cities/Surat.jpeg" alt="Surat"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Diamond City</div>
+        <div class="city-body">
+          <div class="city-name">Surat</div>
+          <div class="city-sub">Surat · Bardoli</div>
+          <a href="city-details.html?city=surat" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="80">
+        <img src="assets/images/cities/Tapi.webp" alt="Tapi"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">River Valley</div>
+        <div class="city-body">
+          <div class="city-name">Tapi</div>
+          <div class="city-sub">Vyara · Songadh · Uchchhal</div>
+          <a href="city-details.html?city=tapi" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="160">
+        <img src="assets/images/cities/dang.jpg" alt="Dang"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Tribal Forest</div>
+        <div class="city-body">
+          <div class="city-name">Dang</div>
+          <div class="city-sub">Ahwa · Saputara · Waghai</div>
+          <a href="city-details.html?city=dang" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="240">
+        <img src="assets/images/cities/Bharuch.webp" alt="Bharuch"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Ancient Port</div>
+        <div class="city-body">
+          <div class="city-name">Bharuch</div>
+          <div class="city-sub">Bharuch Town</div>
+          <a href="city-details.html?city=bharuch" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="320">
+        <img src="assets/images/cities/Rajpipla.jpg" alt="Narmada"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Dam Country</div>
+        <div class="city-body">
+          <div class="city-name">Narmada</div>
+          <div class="city-sub">Rajpipla</div>
+          <a href="city-details.html?city=narmada" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="400">
+        <img src="assets/images/cities/Navsari.jpg" alt="Navsari"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Parsi Heritage</div>
+        <div class="city-body">
+          <div class="city-name">Navsari</div>
+          <div class="city-sub">Navsari Town</div>
+          <a href="city-details.html?city=navsari" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+      <div class="city-card" data-aos="fade-up" data-aos-delay="480">
+        <img src="assets/images/cities/Valsad.jpg" alt="Valsad"/>
+        <div class="city-overlay"></div>
+        <div class="city-badge">Coastal</div>
+        <div class="city-body">
+          <div class="city-name">Valsad</div>
+          <div class="city-sub">Valsad City</div>
+          <a href="city-details.html?city=valsad" class="city-btn">Explore Now →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div><!-- end #explore -->
+
+<!-- ===== HIGHLIGHT STRIP ===== -->
+<div class="highlight" data-aos="fade-up">
+  <div class="hl-text">
+    <h2>Plan your perfect Gujarat journey</h2>
+    <p>Whether you're a solo wanderer, a family on holiday, or a culture-seeker — HiddenHive curates experiences that take you beyond the tourist trail.</p>
+    <div class="hl-features">
+      <div class="hl-feat">
+        <span class="hl-feat-icon">🗺️</span>
+        <div>
+          <div class="hl-feat-label">Curated</div>
+          <div class="hl-feat-text">Hand-picked spots locals love</div>
+        </div>
+      </div>
+      <div class="hl-feat">
+        <span class="hl-feat-icon">📍</span>
+        <div>
+          <div class="hl-feat-label">Mapped</div>
+          <div class="hl-feat-text">Every place pinned &amp; navigable</div>
+        </div>
+      </div>
+      <div class="hl-feat">
+        <span class="hl-feat-icon">🌿</span>
+        <div>
+          <div class="hl-feat-label">Responsible</div>
+          <div class="hl-feat-text">Eco-conscious travel tips</div>
+        </div>
+      </div>
+      <div class="hl-feat">
+        <span class="hl-feat-icon">🎒</span>
+        <div>
+          <div class="hl-feat-label">Ready</div>
+          <div class="hl-feat-text">Itineraries for every budget</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hl-visual"></div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div>
+    <div class="footer-logo">Hidden<span>Hive</span></div>
+    <p class="footer-desc">Uncovering secret spots, forgotten trails, and unforgettable experiences across the land of Gujarat.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Regions</h4>
+    <a href="#explore">Central Gujarat</a>
+    <a href="#explore">North Gujarat</a>
+    <a href="#explore">Saurashtra &amp; Kutch</a>
+    <a href="#explore">South Gujarat</a>
+  </div>
+  <div class="footer-col">
+    <h4>Explore</h4>
+    <a href="#categories">Temples &amp; Heritage</a>
+    <a href="#categories">Nature &amp; Wildlife</a>
+    <a href="#categories">Food &amp; Culture</a>
+    <a href="about.html">About HiddenHive</a>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span class="footer-copy">© 2026 HiddenHive · Gujarat. All rights reserved.</span>
+  <div class="footer-tags">
+  </div>
+</div>
+
+<!-- ===== SCRIPTS ===== -->
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+<script>
+  AOS.init({ duration: 1100, once: true, offset: 60 });
+
+  /* ===== NAVBAR SCROLL EFFECT ===== */
+  window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 100) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+
+  /* ===== SCROLL PROGRESS BAR ===== */
+  window.addEventListener('scroll', () => {
+    const scrollProgress = document.querySelector('.scroll-progress');
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (window.scrollY / scrollHeight) * 100;
+    scrollProgress.style.width = scrolled + '%';
+  });
+
+  /* ===== CURSOR GLOW EFFECT ===== */
+  const cursorGlow = document.querySelector('.cursor-glow');
+  document.addEventListener('mousemove', (e) => {
+    cursorGlow.style.left = e.clientX + 'px';
+    cursorGlow.style.top = e.clientY + 'px';
+    cursorGlow.style.opacity = '1';
+  });
+
+  document.addEventListener('mouseleave', () => {
+    cursorGlow.style.opacity = '0';
+  });
+
+  /* ===== REGION HEAD ANIMATION ===== */
+  const observerOptions = {
+    threshold: 0.3,
+    rootMargin: '0px'
+  };
+
+  const regionHeadObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.region-head').forEach(head => {
+    regionHeadObserver.observe(head);
+  });
+
+  /* ===== USER SECTION ===== */
+  const userSection = document.getElementById("userSection");
+  if (localStorage.getItem("isLoggedIn")) {
+    userSection.innerHTML = `<a href="#" onclick="logoutUser()" style="color:var(--saffron)">Logout</a>`;
+  } else {
+    userSection.innerHTML = `<a href="login.html">Login</a>`;
+  }
+
+  function logoutUser() {
+    localStorage.removeItem("isLoggedIn");
+    window.location.href = "login.html";
+  }
+
+  /* ===== SEARCH FUNCTIONALITY ===== */
+  function searchContent() {
+    const q = document.getElementById("searchInput").value.trim().toLowerCase();
+    if (!q) return;
+    const cards = document.querySelectorAll(".city-card");
+    let matchCount = 0;
+    
+    cards.forEach(card => {
+      const text = card.innerText.toLowerCase();
+      const matches = text.includes(q);
+      
+      if (matches) {
+        card.style.opacity = "1";
+        card.style.transform = "scale(1)";
+        matchCount++;
+      } else {
+        card.style.opacity = "0.3";
+        card.style.transform = "scale(0.95)";
+      }
+    });
+    
+    // Scroll to results
+    if (matchCount > 0) {
+      document.getElementById("explore").scrollIntoView({ behavior: "smooth" });
+    }
+  }
+
+  function quickSearch(term) {
+    document.getElementById("searchInput").value = term;
+    searchContent();
+  }
+
+  document.getElementById("searchInput").addEventListener("keydown", e => {
+    if (e.key === "Enter") searchContent();
+  });
+
+  /* Reset on empty search */
+  document.getElementById("searchInput").addEventListener("input", e => {
+    if (!e.target.value.trim()) {
+      document.querySelectorAll(".city-card").forEach(c => {
+        c.style.opacity = "1";
+        c.style.transform = "scale(1)";
+      });
+    }
+  });
+
+  /* ===== SMOOTH SCROLL FOR ANCHOR LINKS ===== */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (href !== '#' && href !== '#!' && !this.getAttribute('onclick')) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
